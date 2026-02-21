@@ -255,6 +255,13 @@
             order: 1;
         }
         
+        .header-divider {
+            width: 2px;
+            height: 40px;
+            background: #1e293b;
+            order: 3;
+        }
+        
         .user-name {
             font-size: 1rem;
             font-weight: 600;
@@ -277,6 +284,7 @@
         .header-icons {
             display: flex;
             gap: 0.75rem;
+            order: 4;
         }
         
         .header-icon {
@@ -754,20 +762,21 @@
             </div>
             
             <div class="header-center">
-                <img id="displayPhoto" class="user-photo" src="" alt="User">
                 <div class="user-details">
                     <div class="user-name" id="displayName">VINITH PRABHU</div>
                     <div class="user-id" id="displayId">N2BBTG1512B</div>
                 </div>
-            </div>
-            
-            <div class="header-right">
+                <img id="displayPhoto" class="user-photo" src="" alt="User">
+                <div class="header-divider"></div>
                 <div class="header-icons">
                     <div class="header-icon"><i class="fas fa-list"></i></div>
                     <div class="header-icon"><i class="fas fa-calculator"></i></div>
                     <div class="header-icon"><i class="fas fa-cog"></i></div>
                     <div class="header-icon close-btn" onclick="exitExam()"><i class="fas fa-times"></i></div>
                 </div>
+            </div>
+            
+            <div class="header-right">
             </div>
         </div>
 
