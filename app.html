@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KCET Mock Test Platform</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        /* Screens */
+        .screen { display: none; }
+        .screen.active { display: block; }
+        
+        /* Config Screen */
+        #configScreen.active { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 { font-size: 2.5rem; color: #1e293b; text-align: center; margin-bottom: 0.5rem; }
+        .subtitle { text-align: center; color: #64748b; font-size: 1.2rem; margin-bottom: 3rem; }
+        
+        .form-group { margin-bottom: 3rem; }
+        .form-group label { display: block; font-size: 1.3rem; font-weight: 600; color: #1e293b; margin-bottom: 1.5rem; }
+        
+        .test-type-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .test-type-card {
+            padding: 2rem;
+            background: #f8fafc;
+            border: 3px solid transparent;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .test-type-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .test-type-card.selected { border-color: #2563eb; background: #eff6ff; }
+        .test-type-card .icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+        .test-type-card h3 { color: #1e293b; margin-bottom: 0.5rem; }
+        .test-type-card p { color: #64748b; font-size: 0.9rem; }
+        
+        .question-count-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        .count-btn {
+            padding: 1.5rem;
+            background: #f8fafc;
+            border: 3px solid transparent;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #1e293b;
+        }
+        .count-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .count-btn.selected { border-color: #2563eb; background: #2563eb; color: white; }
+        
+        .subject-distribution {
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .subject-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .config-summary {
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: none;
+        }
+        .config-summary h3 { margin-bottom: 1rem; }
+        .config-summary p { margin-bottom: 0.5rem; font-size: 1.1rem; }
+        
+        .btn-primary {
+            padding: 1rem 2rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: block;
+            margin: 0 auto;
+            min-width: 200px;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3); }
+        .btn-primary:disabled { background: #cbd5e1; cursor: not-allowed; transform: none; }
+        
+        /* Test Screen */
+        .test-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-left h2 { font-size: 1.5rem; color: #1e293b; }
+        .subject-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: #2563eb;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 1rem;
+        }
+        
+        .timer {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2563eb;
+            padding: 0.5rem 1.5rem;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+        .timer.warning { color: #ef4444; animation: pulse 1s infinite; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .test-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .question-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f8fafc;
+        }
+        
+        .question-number { font-weight: 600; color: #1e293b; font-size: 1.1rem; }
+        
+        .btn-bookmark {
+            background: none;
+            border: 2px solid #f59e0b;
+            color: #f59e0b;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-bookmark:hover, .btn-bookmark.active { background: #f59e0b; color: white; }
+        
+        .question-content { margin-bottom: 2rem; }
+        .question-content p { font-size: 1.1rem; line-height: 1.8; color: #1e293b; }
+        
+        .options { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+        .option {
+            padding: 1.25rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .option:hover { border-color: #2563eb; background: #eff6ff; }
+        .option.selected { border-color: #2563eb; background: #2563eb; color: white; }
+        
+        .option-label {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        .option.selected .option-label { background: white; color: #2563eb; }
+        
+        .question-nav { display: flex; justify-content: space-between; gap: 1rem; }
+        .question-nav button { flex: 1; padding: 1rem; border: none; border-radius: 10px; font-size: 1rem; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .btn-secondary { background: #f8fafc; color: #1e293b; }
+        .btn-secondary:hover { background: #e2e8f0; }
+        
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 1rem; }
+        
+        .question-palette {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .question-palette h3 { margin-bottom: 1rem; color: #1e293b; }
+        
+        .palette-legend {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .legend-box {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 0.5rem;
+        }
+        .legend-box.answered { background: #10b981; }
+        .legend-box.not-answered { background: #ef4444; }
+        .legend-box.marked { background: #f59e0b; }
+        .legend-box.not-visited { background: #f8fafc; border: 2px solid #64748b; }
+        
+        .palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
+        .palette-btn {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .palette-btn.not-visited { background: #f8fafc; color: #1e293b; }
+        .palette-btn.answered { background: #10b981; color: white; }
+        .palette-btn.not-answered { background: #ef4444; color: white; }
+        .palette-btn.marked { background: #f59e0b; color: white; }
+        .palette-btn:hover { transform: scale(1.1); }
+        
+        .btn-submit {
+            background: #10b981;
+            color: white;
+            width: 100%;
+            padding: 1.25rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); }
+        
+        /* Exit Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            text-align: center;
+        }
+        .modal-content h2 { color: #1e293b; margin-bottom: 1rem; }
+        .modal-content p { color: #64748b; margin-bottom: 2rem; line-height: 1.6; }
+        
+        .modal-buttons { display: flex; gap: 1rem; justify-content: center; }
+        .btn-danger { padding: 1rem 2rem; background: #ef4444; color: white; border: none; border-radius: 10px; font-size: 1rem; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3); }
+        
+        @media (max-width: 1024px) {
+            .test-container { grid-template-columns: 1fr; }
+            .sidebar { order: -1; }
+            .test-type-options { grid-template-columns: 1fr; }
+            .question-count-options { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Config Screen -->
+    <div id="configScreen" class="screen active">
+        <div class="container">
+            <h1>Mock Test Configuration</h1>
+            <p class="subtitle">Choose your test preferences</p>
+            
+            <div class="form-group">
+                <label>Select Test Type</label>
+                <div class="test-type-options" id="testTypeOptions"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Number of Questions Per Subject</label>
+                <div class="question-count-options" id="questionCountOptions"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Test Details</label>
+                <div class="subject-distribution" id="subjectDistribution">
+                    <span>Select question count first</span>
+                </div>
+            </div>
+
+            <div class="config-summary" id="configSummary">
+                <h3>Test Summary</h3>
+                <p><strong>Type:</strong> <span id="summaryType">-</span></p>
+                <p><strong>Total Questions:</strong> <span id="summaryQuestions">-</span></p>
+                <p><strong>Duration:</strong> <span id="summaryDuration">-</span></p>
+                <p><strong>Marking:</strong> +1 for correct, -0.25 for incorrect</p>
+            </div>
+
+            <button class="btn-primary" id="startTestBtn" disabled>Start Test</button>
+        </div>
+    </div>
+
+    <!-- Exit Modal -->
+    <div id="exitModal" class="modal">
+        <div class="modal-content">
+            <h2>⚠️ Exit Test?</h2>
+            <p>Are you sure you want to exit? Your progress will be saved but timer continues.</p>
+            <div class="modal-buttons">
+                <button class="btn-secondary" style="padding:1rem 2rem;" onclick="cancelExit()">Continue Test</button>
+                <button class="btn-danger" onclick="confirmExit()">Exit Test</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Screen -->
+    <div id="testScreen" class="screen">
+        <div class="test-header">
+            <div class="header-left">
+                <h2>KCET Mock Test</h2>
+                <span id="currentSubject" class="subject-badge">Physics</span>
+            </div>
+            <div class="timer" id="timer">80:00</div>
+        </div>
+
+        <div class="test-container">
+            <div class="question-panel">
+                <div class="question-header">
+                    <span class="question-number">Question <span id="questionNum">1</span> of <span id="totalQuestions">40</span></span>
+                    <button class="btn-bookmark" onclick="toggleBookmark()">🔖 Mark for Review</button>
+                </div>
+                
+                <div class="question-content">
+                    <p id="questionText"></p>
+                </div>
+
+                <div class="options" id="optionsContainer"></div>
+
+                <div class="question-nav">
+                    <button class="btn-secondary" onclick="previousQuestion()">← Previous</button>
+                    <button class="btn-secondary" onclick="clearResponse()">Clear Response</button>
+                    <button class="btn-primary" onclick="nextQuestion()">Next →</button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="question-palette">
+                    <h3>Question Palette</h3>
+                    <div class="palette-legend">
+                        <span><span class="legend-box answered"></span> Answered</span>
+                        <span><span class="legend-box not-answered"></span> Not Answered</span>
+                        <span><span class="legend-box marked"></span> Marked</span>
+                        <span><span class="legend-box not-visited"></span> Not Visited</span>
+                    </div>
+                    <div id="questionPalette" class="palette-grid"></div>
+                </div>
+                <button class="btn-submit" onclick="submitTest()">Submit Test</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample questions (you'll need 90 per subject)
+        const sampleQuestions = {
+            Physics: [
+                { id: 1, question: "A particle moves in a circle of radius 5 cm. The acceleration is:", options: ["25 m/s²", "5 m/s²", "10 m/s²", "15 m/s²"], correct: 1 }
+            ],
+            Chemistry: [
+                { id: 1, question: "The IUPAC name of CH₃-CH(CH₃)-CH₂-OH is:", options: ["2-Methylpropan-1-ol", "Isobutanol", "2-Methylpropanol", "Butanol"], correct: 0 }
+            ],
+            Mathematics: [
+                { id: 1, question: "If A = [1 2; 3 4], then |2A| equals:", options: ["4", "-4", "8", "-8"], correct: 3 }
+            ]
+        };
+        
+        // State
+        const testConfig = { type: null, questionCount: null, totalQuestions: null, duration: 0 };
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let bookmarked = [];
+        let visited = [];
+        let timeLeft = 0;
+        let timerInterval;
+        let testQuestions = [];
+        let isFullscreen = false;
+        
+        // Initialize
+        function init() {
+            const testTypes = [
+                { id: 'ncert', icon: '📚', title: 'NCERT Based', desc: 'Standard NCERT syllabus' },
+                { id: 'kcet', icon: '🎓', title: 'KCET Pattern', desc: 'Karnataka CET exam' },
+                { id: 'mock', icon: '📝', title: 'Mock Test', desc: 'General practice' }
+            ];
+            
+            const testTypeContainer = document.getElementById('testTypeOptions');
+            testTypes.forEach(type => {
+                const card = document.createElement('div');
+                card.className = 'test-type-card';
+                card.innerHTML = `<span class="icon">${type.icon}</span><h3>${type.title}</h3><p>${type.desc}</p>`;
+                card.addEventListener('click', () => selectTestType(type.id, card));
+                testTypeContainer.appendChild(card);
+            });
+            
+            const counts = [25, 40, 60, 90];
+            const countContainer = document.getElementById('questionCountOptions');
+            counts.forEach(count => {
+                const btn = document.createElement('button');
+                btn.className = 'count-btn';
+                btn.textContent = `${count} Per Subject`;
+                btn.addEventListener('click', () => selectQuestionCount(count, btn));
+                countContainer.appendChild(btn);
+            });
+        }
+        
+        function selectTestType(type, element) {
+            testConfig.type = type;
+            document.querySelectorAll('.test-type-card').forEach(c => c.classList.remove('selected'));
+            element.classList.add('selected');
+            updateSummary();
+        }
+        
+        function selectQuestionCount(count, element) {
+            testConfig.questionCount = count;
+            testConfig.totalQuestions = count * 3;
+            const durationMap = { 25: 90, 40: 120, 60: 180, 90: 240 };
+            testConfig.duration = durationMap[count];
+            
+            document.querySelectorAll('.count-btn').forEach(b => b.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            const dist = document.getElementById('subjectDistribution');
+            dist.innerHTML = `
+                <div class="subject-item"><span>Physics</span><strong>${count} Questions</strong></div>
+                <div class="subject-item"><span>Chemistry</span><strong>${count} Questions</strong></div>
+                <div class="subject-item"><span>Mathematics</span><strong>${count} Questions</strong></div>
+                <div class="subject-item" style="margin-top:1rem;background:linear-gradient(135deg,#667eea,#764ba2);color:white;">
+                    <span><strong>Total</strong></span><strong>${count * 3} Questions</strong>
+                </div>
+            `;
+            updateSummary();
+        }
+        
+        function updateSummary() {
+            if (testConfig.type && testConfig.questionCount) {
+                const summary = document.getElementById('configSummary');
+                summary.style.display = 'block';
+                
+                const typeNames = { ncert: 'NCERT Based', kcet: 'KCET Pattern', mock: 'Mock Test' };
+                const hours = Math.floor(testConfig.duration / 60);
+                const minutes = testConfig.duration % 60;
+                let durationText = hours > 0 ? `${hours} hour${hours > 1 ? 's' : ''}` : '';
+                if (minutes > 0) durationText += (hours > 0 ? ' ' : '') + `${minutes} minutes`;
+                
+                document.getElementById('summaryType').textContent = typeNames[testConfig.type];
+                document.getElementById('summaryQuestions').textContent = testConfig.totalQuestions;
+                document.getElementById('summaryDuration').textContent = durationText;
+                document.getElementById('startTestBtn').disabled = false;
+            }
+        }
+        
+        function startTest() {
+            // Generate test questions (repeat sample for demo)
+            testQuestions = [];
+            ['Physics', 'Chemistry', 'Mathematics'].forEach(subject => {
+                for (let i = 0; i < testConfig.questionCount; i++) {
+                    const q = {...sampleQuestions[subject][0]};
+                    q.id = testQuestions.length + 1;
+                    q.subject = subject;
+                    testQuestions.push(q);
+                }
+            });
+            
+            userAnswers = new Array(testConfig.totalQuestions).fill(null);
+            bookmarked = new Array(testConfig.totalQuestions).fill(false);
+            visited = new Array(testConfig.totalQuestions).fill(false);
+            timeLeft = testConfig.duration * 60;
+            
+            document.getElementById('configScreen').classList.remove('active');
+            document.getElementById('testScreen').classList.add('active');
+            document.getElementById('totalQuestions').textContent = testConfig.totalQuestions;
+            
+            enterFullscreen();
+            initializePalette();
+            loadQuestion(0);
+            startTimer();
+        }
+        
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) elem.requestFullscreen();
+            else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+            isFullscreen = true;
+        }
+        
+        function exitFullscreen() {
+            if (document.exitFullscreen) document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            isFullscreen = false;
+        }
+        
+        function showExitModal() {
+            document.getElementById('exitModal').classList.add('active');
+        }
+        
+        function cancelExit() {
+            document.getElementById('exitModal').classList.remove('active');
+            enterFullscreen();
+        }
+        
+        function confirmExit() {
+            document.getElementById('exitModal').classList.remove('active');
+            exitFullscreen();
+            alert('Test submitted! Results screen coming soon.');
+        }
+        
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement && isFullscreen) showExitModal();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('testScreen').classList.contains('active')) {
+                e.preventDefault();
+                showExitModal();
+            }
+        });
+        
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 300) document.getElementById('timer').classList.add('warning');
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        function initializePalette() {
+            const palette = document.getElementById('questionPalette');
+            palette.innerHTML = '';
+            for (let i = 0; i < testConfig.totalQuestions; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'palette-btn not-visited';
+                btn.textContent = i + 1;
+                btn.onclick = () => loadQuestion(i);
+                palette.appendChild(btn);
+            }
+        }
+        
+        function loadQuestion(index) {
+            currentQuestion = index;
+            visited[index] = true;
+            
+            const q = testQuestions[index];
+            document.getElementById('questionNum').textContent = index + 1;
+            document.getElementById('questionText').textContent = q.question;
+            document.getElementById('currentSubject').textContent = q.subject;
+            
+            const badge = document.getElementById('currentSubject');
+            if (q.subject === 'Physics') badge.style.background = '#3b82f6';
+            else if (q.subject === 'Chemistry') badge.style.background = '#10b981';
+            else badge.style.background = '#f59e0b';
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            q.options.forEach((option, i) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                if (userAnswers[index] === i) optionDiv.classList.add('selected');
+                optionDiv.innerHTML = `
+                    <span class="option-label">${String.fromCharCode(65 + i)}</span>
+                    <span>${option}</span>
+                `;
+                optionDiv.onclick = () => selectOption(i);
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            const bookmarkBtn = document.querySelector('.btn-bookmark');
+            if (bookmarked[index]) bookmarkBtn.classList.add('active');
+            else bookmarkBtn.classList.remove('active');
+            
+            updatePalette();
+        }
+        
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestion] = optionIndex;
+            document.querySelectorAll('.option').forEach((opt, i) => {
+                if (i === optionIndex) opt.classList.add('selected');
+                else opt.classList.remove('selected');
+            });
+            updatePalette();
+        }
+        
+        function clearResponse() {
+            userAnswers[currentQuestion] = null;
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            updatePalette();
+        }
+        
+        function toggleBookmark() {
+            bookmarked[currentQuestion] = !bookmarked[currentQuestion];
+            document.querySelector('.btn-bookmark').classList.toggle('active');
+            updatePalette();
+        }
+        
+        function nextQuestion() {
+            if (currentQuestion < testConfig.totalQuestions - 1) loadQuestion(currentQuestion + 1);
+        }
+        
+        function previousQuestion() {
+            if (currentQuestion > 0) loadQuestion(currentQuestion - 1);
+        }
+        
+        function updatePalette() {
+            const buttons = document.querySelectorAll('.palette-btn');
+            buttons.forEach((btn, i) => {
+                btn.className = 'palette-btn';
+                if (bookmarked[i]) btn.classList.add('marked');
+                else if (userAnswers[i] !== null) btn.classList.add('answered');
+                else if (visited[i]) btn.classList.add('not-answered');
+                else btn.classList.add('not-visited');
+            });
+        }
+        
+        function submitTest() {
+            if (!confirm('Submit test?')) return;
+            clearInterval(timerInterval);
+            exitFullscreen();
+            alert('Test submitted! Full results screen coming soon.');
+        }
+        
+        document.getElementById('startTestBtn').addEventListener('click', startTest);
+        init();
+    </script>
+</body>
+</html>
