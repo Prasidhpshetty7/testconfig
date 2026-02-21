@@ -265,13 +265,15 @@
         .user-name {
             font-size: 1rem;
             font-weight: 600;
-            color: #1e293b;
+            color: #1e40af;
         }
         
         .user-id {
             font-size: 0.85rem;
             color: #64748b;
             margin-top: 0.15rem;
+            font-weight: 600;
+            align-self: flex-start;
         }
         
         .header-right {
@@ -491,19 +493,35 @@
         
         .timer-section {
             background: white;
-            padding: 1rem;
+            padding: 0;
             border-radius: 6px;
             margin-bottom: 1.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
         
-        .timer-label {
+        .timer-header {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #64748b;
-            margin-bottom: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: #e0f2fe;
+        }
+        
+        .timer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .test-label {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #64748b;
         }
         
         .timer-display {
@@ -825,11 +843,17 @@
 
             <div class="sidebar">
                 <div class="timer-section">
-                    <div class="timer-label">
+                    <div class="timer-header">
                         <i class="fas fa-clock"></i>
                         Time Remaining
                     </div>
-                    <div class="timer-display" id="timerDisplay">01:58:46</div>
+                    <div class="timer-row">
+                        <div class="test-label">
+                            <i class="fas fa-circle" style="font-size: 0.5rem; margin-right: 0.5rem;"></i>
+                            Test
+                        </div>
+                        <div class="timer-display" id="timerDisplay">01:58:46</div>
+                    </div>
                 </div>
 
                 <div class="subject-section">
