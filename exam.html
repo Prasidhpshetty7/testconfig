@@ -602,12 +602,20 @@
         }
         
         .subject-badge {
-            background: #3b82f6;
-            color: white;
+            background: transparent;
+            color: #64748b;
+            border: 2px solid #cbd5e1;
             padding: 0.15rem 0.5rem;
             border-radius: 10px;
             font-size: 0.7rem;
             font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .subject-badge.active {
+            background: #1e40af;
+            color: white;
+            border-color: #1e40af;
         }
         
         .questions-label {
@@ -754,10 +762,10 @@
         
         .system-icons {
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
-            gap: 1.5rem;
-            padding: 0.5rem;
+            gap: 2rem;
+            padding: 0.75rem 1rem;
             background: white;
             border-radius: 6px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -769,7 +777,7 @@
         }
         
         .system-icons i {
-            font-size: 1rem;
+            font-size: 1.4rem;
             color: #64748b;
             cursor: pointer;
             transition: color 0.3s;
@@ -1167,7 +1175,10 @@
                 <div class="subject-section">
                     <div class="subject-header" onclick="switchSubject('Physics', 0); toggleSubjectGrid('physicsGrid')" style="cursor: pointer;">
                         <span class="subject-name">Physics</span>
-                        <span class="subject-badge" id="physicsBadge">01/40</span>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span class="subject-badge" id="physicsBadge">01/40</span>
+                            <i class="fas fa-chevron-down" id="physicsChevron"></i>
+                        </div>
                     </div>
                     <div class="questions-label">Questions</div>
                     <div class="question-grid" id="physicsGrid"></div>
@@ -1201,7 +1212,10 @@
                 <div class="subject-section">
                     <div class="subject-header" onclick="switchSubject('Chemistry', testConfig.questionCount); toggleSubjectGrid('chemistryGrid')" style="cursor: pointer;">
                         <span class="subject-name">Chemistry</span>
-                        <span class="subject-badge" id="chemistryBadge">0/40</span>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span class="subject-badge" id="chemistryBadge">0/40</span>
+                            <i class="fas fa-chevron-down" id="chemistryChevron"></i>
+                        </div>
                     </div>
                     <div class="questions-label" style="display: none;" id="chemistryLabel">Questions</div>
                     <div class="question-grid" id="chemistryGrid" style="display: none;"></div>
@@ -1235,7 +1249,10 @@
                 <div class="subject-section">
                     <div class="subject-header" onclick="switchSubject('Mathematics', testConfig.questionCount * 2); toggleSubjectGrid('mathGrid')" style="cursor: pointer;">
                         <span class="subject-name">Mathematics</span>
-                        <span class="subject-badge" id="mathematicsBadge">0/40</span>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span class="subject-badge" id="mathematicsBadge">0/40</span>
+                            <i class="fas fa-chevron-down" id="mathChevron"></i>
+                        </div>
                     </div>
                     <div class="questions-label" style="display: none;" id="mathLabel">Questions</div>
                     <div class="question-grid" id="mathGrid" style="display: none;"></div>
@@ -1555,6 +1572,7 @@
             
             // Update subject badges
             document.getElementById('physicsBadge').textContent = `01/${testConfig.questionCount}`;
+            document.getElementById('physicsBadge').classList.add('active');
             document.getElementById('chemistryBadge').textContent = `0/${testConfig.questionCount}`;
             document.getElementById('mathematicsBadge').textContent = `0/${testConfig.questionCount}`;
             
@@ -1615,6 +1633,7 @@
             const grid = document.getElementById(gridId);
             const label = document.getElementById(gridId.replace('Grid', 'Label'));
             const legend = document.getElementById(gridId.replace('Grid', 'Legend'));
+            const chevron = document.getElementById(gridId.replace('Grid', 'Chevron'));
             
             // Close all other grids first
             const allGrids = ['physicsGrid', 'chemistryGrid', 'mathGrid'];
@@ -1623,10 +1642,15 @@
                     const otherGrid = document.getElementById(gId);
                     const otherLabel = document.getElementById(gId.replace('Grid', 'Label'));
                     const otherLegend = document.getElementById(gId.replace('Grid', 'Legend'));
+                    const otherChevron = document.getElementById(gId.replace('Grid', 'Chevron'));
                     
                     if (otherGrid) otherGrid.style.display = 'none';
                     if (otherLabel) otherLabel.style.display = 'none';
                     if (otherLegend) otherLegend.style.display = 'none';
+                    if (otherChevron) {
+                        otherChevron.classList.remove('fa-chevron-up');
+                        otherChevron.classList.add('fa-chevron-down');
+                    }
                 }
             });
             
@@ -1635,10 +1659,18 @@
                 grid.style.display = 'grid';
                 if (label) label.style.display = 'block';
                 if (legend) legend.style.display = 'block';
+                if (chevron) {
+                    chevron.classList.remove('fa-chevron-down');
+                    chevron.classList.add('fa-chevron-up');
+                }
             } else {
                 grid.style.display = 'none';
                 if (label) label.style.display = 'none';
                 if (legend) legend.style.display = 'none';
+                if (chevron) {
+                    chevron.classList.remove('fa-chevron-up');
+                    chevron.classList.add('fa-chevron-down');
+                }
             }
         }
         
@@ -1661,6 +1693,19 @@
             const subjectNames = ['Physics', 'Chemistry', 'Mathematics'];
             const currentSubject = subjectNames[subjectIndex];
             const questionInSubject = (currentQ % testConfig.questionCount) + 1;
+            
+            // Update badge active states
+            document.getElementById('physicsBadge').classList.remove('active');
+            document.getElementById('chemistryBadge').classList.remove('active');
+            document.getElementById('mathematicsBadge').classList.remove('active');
+            
+            if (subjectIndex === 0) {
+                document.getElementById('physicsBadge').classList.add('active');
+            } else if (subjectIndex === 1) {
+                document.getElementById('chemistryBadge').classList.add('active');
+            } else if (subjectIndex === 2) {
+                document.getElementById('mathematicsBadge').classList.add('active');
+            }
             
             // Update header subtitle
             document.getElementById('examSubtitle').textContent = 
