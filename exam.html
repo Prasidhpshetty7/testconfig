@@ -308,6 +308,15 @@
             color: #1e293b;
         }
         
+        .close-section {
+            background: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70px;
+        }
+        
         .close-btn {
             background: transparent;
             border: none;
@@ -322,7 +331,7 @@
         
         .exam-body {
             display: grid;
-            grid-template-columns: 1fr 320px;
+            grid-template-columns: 1fr 380px;
             height: calc(100vh - 70px);
             position: relative;
         }
@@ -330,12 +339,24 @@
         .exam-body::before {
             content: '';
             position: absolute;
-            right: 320px;
+            right: 380px;
             top: -70px;
             width: 8px;
             height: calc(100vh);
             background: #e2e8f0;
             z-index: 10;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: #f1f5f9;
+            padding: 1rem;
+            overflow-y: hidden;
+            border-left: 1px solid #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 70px - 0.5rem);
+            margin-top: 0.5rem;
         }
         
         .question-section {
@@ -486,18 +507,22 @@
         /* Sidebar */
         .sidebar {
             background: #f1f5f9;
-            padding: 1.5rem;
-            overflow-y: auto;
+            padding: 1rem;
+            overflow-y: hidden;
             border-left: 1px solid #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 70px);
         }
         
         .timer-section {
             background: white;
             padding: 0;
             border-radius: 6px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             overflow: hidden;
+            flex-shrink: 0;
         }
         
         .timer-header {
@@ -550,8 +575,9 @@
         .subject-section {
             background: white;
             border-radius: 6px;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
         
         .subject-header {
@@ -643,17 +669,18 @@
         
         .legend-section {
             background: white;
-            padding: 1rem;
+            padding: 0.75rem;
             border-radius: 6px;
-            margin-top: 1rem;
+            margin-top: 0.75rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
         
         .legend-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
-            font-size: 0.8rem;
+            gap: 0.5rem;
+            font-size: 0.75rem;
         }
         
         .legend-item {
@@ -821,7 +848,9 @@
             </div>
             
             <div class="header-right">
-                <div class="header-icon close-btn" onclick="exitExam()"><i class="fas fa-times"></i></div>
+                <div class="close-section">
+                    <div class="header-icon close-btn" onclick="exitExam()"><i class="fas fa-times"></i></div>
+                </div>
             </div>
         </div>
 
