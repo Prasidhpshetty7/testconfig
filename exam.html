@@ -799,6 +799,44 @@
             color: #3b82f6;
         }
         
+        /* Right Side Panel Icons */
+        .right-panel-icons {
+            position: fixed;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background: #1e40af;
+            padding: 1.5rem 0.75rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        
+        .right-panel-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .right-panel-icon:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.05);
+        }
+        
+        .right-panel-icon i {
+            font-size: 1.3rem;
+            color: white;
+        }
+        
         /* Calculator Modal */
         .calculator-modal {
             display: none;
@@ -1328,6 +1366,19 @@
     <!-- Modal Overlay -->
     <div id="modalOverlay" class="modal-overlay" onclick="closeAllModals()"></div>
 
+    <!-- Right Side Panel Icons -->
+    <div class="right-panel-icons">
+        <div class="right-panel-icon" title="Image Upload">
+            <i class="fas fa-image"></i>
+        </div>
+        <div class="right-panel-icon" title="Face Scan">
+            <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="right-panel-icon" title="Profile">
+            <i class="fas fa-user"></i>
+        </div>
+    </div>
+
     <!-- Calculator Modal -->
     <div id="calculatorModal" class="calculator-modal">
         <div class="calculator-header">
@@ -1480,6 +1531,151 @@
             visited = new Array(testConfig.totalQuestions).fill(false);
         });
         
+        // Question banks for each subject
+        const questionBanks = {
+            physics: [
+                {
+                    text: "The pair of physical quantities that have the same dimensions are:\na) Reynold's number and coefficient of friction\nb) Latent heat and gravitational potential\nc) Activity and frequency of light wave\nd) Planck constant and torque",
+                    options: ["b and c are correct", "a and b are correct", "a, b, and c are correct", "All are correct"]
+                },
+                {
+                    text: "A particle is moving in a circular path of radius r. The displacement after half a circle would be:",
+                    options: ["Zero", "πr", "2r", "2πr"]
+                },
+                {
+                    text: "The velocity-time graph of a particle in one-dimensional motion is shown. Which of the following statements is correct?",
+                    options: ["The particle has constant acceleration", "The particle has never turned around", "The particle has zero displacement", "The average velocity is positive"]
+                },
+                {
+                    text: "A ball is thrown vertically upward with velocity u. The maximum height reached is:",
+                    options: ["u²/2g", "u²/g", "2u²/g", "u/2g"]
+                },
+                {
+                    text: "Newton's second law of motion is:",
+                    options: ["F = ma", "F = mv", "F = m/a", "F = a/m"]
+                },
+                {
+                    text: "The work done by a force is zero when:",
+                    options: ["Force is perpendicular to displacement", "Force is parallel to displacement", "Force is at 45° to displacement", "Force is opposite to displacement"]
+                },
+                {
+                    text: "The SI unit of power is:",
+                    options: ["Watt", "Joule", "Newton", "Pascal"]
+                },
+                {
+                    text: "Kinetic energy of a body is directly proportional to:",
+                    options: ["Square of velocity", "Velocity", "Mass", "Momentum"]
+                },
+                {
+                    text: "The momentum of a photon of energy E is:",
+                    options: ["E/c", "Ec", "E/c²", "Ec²"]
+                },
+                {
+                    text: "The escape velocity from Earth's surface is approximately:",
+                    options: ["11.2 km/s", "7.2 km/s", "9.8 km/s", "15 km/s"]
+                }
+            ],
+            chemistry: [
+                {
+                    text: "The atomic number of an element is determined by the number of:",
+                    options: ["Protons", "Neutrons", "Electrons", "Nucleons"]
+                },
+                {
+                    text: "Which of the following is a noble gas?",
+                    options: ["Argon", "Oxygen", "Nitrogen", "Hydrogen"]
+                },
+                {
+                    text: "The pH of a neutral solution at 25°C is:",
+                    options: ["7", "0", "14", "1"]
+                },
+                {
+                    text: "The molecular formula of glucose is:",
+                    options: ["C₆H₁₂O₆", "C₁₂H₂₂O₁₁", "CH₄", "C₂H₅OH"]
+                },
+                {
+                    text: "Which of the following is an exothermic reaction?",
+                    options: ["Combustion", "Photosynthesis", "Electrolysis", "Decomposition of water"]
+                },
+                {
+                    text: "The valency of carbon is:",
+                    options: ["4", "2", "3", "1"]
+                },
+                {
+                    text: "The chemical formula of common salt is:",
+                    options: ["NaCl", "KCl", "CaCl₂", "MgCl₂"]
+                },
+                {
+                    text: "Which gas is produced when metals react with acids?",
+                    options: ["Hydrogen", "Oxygen", "Carbon dioxide", "Nitrogen"]
+                },
+                {
+                    text: "The process of conversion of solid directly to gas is called:",
+                    options: ["Sublimation", "Evaporation", "Condensation", "Melting"]
+                },
+                {
+                    text: "The number of electrons in the outermost shell of noble gases (except Helium) is:",
+                    options: ["8", "2", "4", "6"]
+                }
+            ],
+            mathematics: [
+                {
+                    text: "If f(x) = x² + 2x + 1, then f(2) is:",
+                    options: ["9", "7", "5", "11"]
+                },
+                {
+                    text: "The derivative of sin(x) is:",
+                    options: ["cos(x)", "-cos(x)", "sin(x)", "-sin(x)"]
+                },
+                {
+                    text: "The value of ∫x dx is:",
+                    options: ["x²/2 + C", "x² + C", "2x + C", "x³/3 + C"]
+                },
+                {
+                    text: "If log₁₀(x) = 2, then x is:",
+                    options: ["100", "10", "20", "1000"]
+                },
+                {
+                    text: "The sum of first n natural numbers is:",
+                    options: ["n(n+1)/2", "n²", "n(n-1)/2", "2n"]
+                },
+                {
+                    text: "The value of sin(90°) is:",
+                    options: ["1", "0", "√3/2", "1/2"]
+                },
+                {
+                    text: "If a² + b² = 25 and ab = 12, then (a + b)² is:",
+                    options: ["49", "25", "37", "13"]
+                },
+                {
+                    text: "The slope of a line perpendicular to y = 2x + 3 is:",
+                    options: ["-1/2", "2", "-2", "1/2"]
+                },
+                {
+                    text: "The determinant of a 2×2 identity matrix is:",
+                    options: ["1", "0", "2", "4"]
+                },
+                {
+                    text: "If P(A) = 0.3 and P(B) = 0.4, and A and B are independent, then P(A ∩ B) is:",
+                    options: ["0.12", "0.7", "0.1", "0.24"]
+                }
+            ]
+        };
+        
+        // Generate more questions by repeating and modifying
+        function generateQuestions(baseQuestions, count) {
+            const questions = [];
+            for (let i = 0; i < count; i++) {
+                const baseQ = baseQuestions[i % baseQuestions.length];
+                questions.push({
+                    text: `Q${i + 1}. ${baseQ.text}`,
+                    options: baseQ.options
+                });
+            }
+            return questions;
+        }
+        
+        let allQuestions = [];
+        
         // Sample question
         const sampleQuestion = {
             text: "The pair of physical quantities that have the same dimensions are:\na) Reynold's number and coefficient of friction b) Latent heat and gravitational potential c) Activity and frequency of light wave d) Planck constant and torque.",
@@ -1566,6 +1762,13 @@
         }
         
         function initExam() {
+            // Generate questions for all subjects based on config
+            const physicsQuestions = generateQuestions(questionBanks.physics, testConfig.questionCount);
+            const chemistryQuestions = generateQuestions(questionBanks.chemistry, testConfig.questionCount);
+            const mathQuestions = generateQuestions(questionBanks.mathematics, testConfig.questionCount);
+            
+            allQuestions = [...physicsQuestions, ...chemistryQuestions, ...mathQuestions];
+            
             // Update header subtitle with correct question count
             document.getElementById('examSubtitle').textContent = 
                 `Physics ( Section 1 of 3 ) > Question 1 of ${testConfig.questionCount} (1 marks)`;
@@ -1711,12 +1914,14 @@
             document.getElementById('examSubtitle').textContent = 
                 `${currentSubject} ( Section ${subjectIndex + 1} of 3 ) > Question ${questionInSubject} of ${testConfig.questionCount} (1 marks)`;
             
-            document.getElementById('questionText').textContent = sampleQuestion.text;
+            // Get the current question from the question bank
+            const currentQuestion = allQuestions[currentQ];
+            document.getElementById('questionText').textContent = currentQuestion.text;
             
             const optionsList = document.getElementById('optionsList');
             optionsList.innerHTML = '';
             
-            sampleQuestion.options.forEach((opt, i) => {
+            currentQuestion.options.forEach((opt, i) => {
                 const div = document.createElement('div');
                 div.className = 'option-item';
                 if (answers[currentQ] === i) div.classList.add('selected');
