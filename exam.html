@@ -618,21 +618,22 @@
         .question-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 0.35rem;
-            padding: 0 1rem 1rem 1rem;
+            gap: 0.15rem;
+            padding: 0 0.5rem 0.5rem 0.5rem;
         }
         
         .question-btn {
             aspect-ratio: 1;
             border: 2px solid #cbd5e1;
             background: white;
-            border-radius: 4px;
-            font-size: 0.8rem;
+            border-radius: 3px;
+            font-size: 0.65rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             position: relative;
             overflow: visible;
+            padding: 0.5rem;
         }
         
         .question-btn::before {
@@ -643,7 +644,7 @@
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 0 12px 12px 0;
+            border-width: 0 26px 26px 0;
             border-color: transparent transparent transparent transparent;
         }
         
@@ -785,6 +786,202 @@
             color: #3b82f6;
         }
         
+        /* Calculator Modal */
+        .calculator-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 1000;
+            padding: 1rem;
+            width: 280px;
+        }
+        
+        .calculator-modal.active {
+            display: block;
+        }
+        
+        .calculator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .calculator-header h3 {
+            font-size: 1rem;
+            color: #1e293b;
+        }
+        
+        .calculator-close {
+            background: transparent;
+            border: none;
+            font-size: 1.2rem;
+            color: #64748b;
+            cursor: pointer;
+        }
+        
+        .calculator-display {
+            background: #f1f5f9;
+            padding: 1rem;
+            text-align: right;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            min-height: 50px;
+            color: #1e293b;
+        }
+        
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .calc-btn {
+            padding: 1rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .calc-btn:hover {
+            background: #e2e8f0;
+        }
+        
+        .calc-btn.operator {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .calc-btn.operator:hover {
+            background: #2563eb;
+        }
+        
+        .calc-btn.equals {
+            background: #10b981;
+            color: white;
+            grid-column: span 2;
+        }
+        
+        .calc-btn.equals:hover {
+            background: #059669;
+        }
+        
+        /* Settings Modal */
+        .settings-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 1000;
+            padding: 1.5rem;
+            width: 350px;
+        }
+        
+        .settings-modal.active {
+            display: block;
+        }
+        
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .settings-header h3 {
+            font-size: 1.2rem;
+            color: #1e293b;
+        }
+        
+        .settings-close {
+            background: transparent;
+            border: none;
+            font-size: 1.2rem;
+            color: #64748b;
+            cursor: pointer;
+        }
+        
+        .setting-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .setting-item label {
+            display: block;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .setting-item select,
+        .setting-item input[type="range"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .setting-item input[type="range"] {
+            padding: 0;
+        }
+        
+        .color-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .color-option {
+            width: 100%;
+            aspect-ratio: 1;
+            border: 3px solid transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.selected {
+            border-color: #2563eb;
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        
+        .modal-overlay.active {
+            display: block;
+        }
+        
         @media (max-width: 1024px) {
             .exam-body {
                 grid-template-columns: 1fr;
@@ -902,9 +1099,9 @@
                 <img id="displayPhoto" class="user-photo" src="" alt="User">
                 <div class="header-divider"></div>
                 <div class="header-icons">
-                    <div class="header-icon"><i class="fas fa-list"></i></div>
-                    <div class="header-icon"><i class="fas fa-calculator"></i></div>
-                    <div class="header-icon"><i class="fas fa-cog"></i></div>
+                    <div class="header-icon" onclick="toggleInfo()"><i class="fas fa-info-circle"></i></div>
+                    <div class="header-icon" onclick="toggleCalculator()"><i class="fas fa-calculator"></i></div>
+                    <div class="header-icon" onclick="toggleSettings()"><i class="fas fa-cog"></i></div>
                 </div>
             </div>
             
@@ -963,7 +1160,7 @@
                 </div>
 
                 <div class="subject-section">
-                    <div class="subject-header" onclick="switchSubject('Physics', 0)" style="cursor: pointer;">
+                    <div class="subject-header" onclick="switchSubject('Physics', 0); toggleSubjectGrid('physicsGrid')" style="cursor: pointer;">
                         <span class="subject-name">Physics</span>
                         <span class="subject-badge" id="physicsBadge">01/40</span>
                     </div>
@@ -972,17 +1169,21 @@
                 </div>
 
                 <div class="subject-section">
-                    <div class="subject-header" onclick="switchSubject('Chemistry', testConfig.questionCount)" style="cursor: pointer;">
+                    <div class="subject-header" onclick="switchSubject('Chemistry', testConfig.questionCount); toggleSubjectGrid('chemistryGrid')" style="cursor: pointer;">
                         <span class="subject-name">Chemistry</span>
                         <span class="subject-badge" id="chemistryBadge">0/40</span>
                     </div>
+                    <div class="questions-label" style="display: none;" id="chemistryLabel">Questions</div>
+                    <div class="question-grid" id="chemistryGrid" style="display: none;"></div>
                 </div>
 
                 <div class="subject-section">
-                    <div class="subject-header" onclick="switchSubject('Mathematics', testConfig.questionCount * 2)" style="cursor: pointer;">
+                    <div class="subject-header" onclick="switchSubject('Mathematics', testConfig.questionCount * 2); toggleSubjectGrid('mathGrid')" style="cursor: pointer;">
                         <span class="subject-name">Mathematics</span>
                         <span class="subject-badge" id="mathematicsBadge">0/40</span>
                     </div>
+                    <div class="questions-label" style="display: none;" id="mathLabel">Questions</div>
+                    <div class="question-grid" id="mathGrid" style="display: none;"></div>
                 </div>
 
                 <div class="legend-section">
@@ -1025,6 +1226,71 @@
                     <i class="fas fa-ellipsis-v"></i>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeAllModals()"></div>
+
+    <!-- Calculator Modal -->
+    <div id="calculatorModal" class="calculator-modal">
+        <div class="calculator-header">
+            <h3>Calculator</h3>
+            <button class="calculator-close" onclick="toggleCalculator()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="calculator-display" id="calcDisplay">0</div>
+        <div class="calculator-buttons">
+            <button class="calc-btn" onclick="calcInput('7')">7</button>
+            <button class="calc-btn" onclick="calcInput('8')">8</button>
+            <button class="calc-btn" onclick="calcInput('9')">9</button>
+            <button class="calc-btn operator" onclick="calcInput('/')">/</button>
+            <button class="calc-btn" onclick="calcInput('4')">4</button>
+            <button class="calc-btn" onclick="calcInput('5')">5</button>
+            <button class="calc-btn" onclick="calcInput('6')">6</button>
+            <button class="calc-btn operator" onclick="calcInput('*')">×</button>
+            <button class="calc-btn" onclick="calcInput('1')">1</button>
+            <button class="calc-btn" onclick="calcInput('2')">2</button>
+            <button class="calc-btn" onclick="calcInput('3')">3</button>
+            <button class="calc-btn operator" onclick="calcInput('-')">-</button>
+            <button class="calc-btn" onclick="calcInput('0')">0</button>
+            <button class="calc-btn" onclick="calcInput('.')">.</button>
+            <button class="calc-btn operator" onclick="calcInput('+')">+</button>
+            <button class="calc-btn" onclick="calcClear()">C</button>
+            <button class="calc-btn equals" onclick="calcEquals()">=</button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="settings-modal">
+        <div class="settings-header">
+            <h3>Display Settings</h3>
+            <button class="settings-close" onclick="toggleSettings()"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div class="setting-item">
+            <label>Text Color</label>
+            <div class="color-options">
+                <div class="color-option selected" style="background: #1e293b;" onclick="changeTextColor('#1e293b', this)"></div>
+                <div class="color-option" style="background: #0f172a;" onclick="changeTextColor('#0f172a', this)"></div>
+                <div class="color-option" style="background: #334155;" onclick="changeTextColor('#334155', this)"></div>
+                <div class="color-option" style="background: #475569;" onclick="changeTextColor('#475569', this)"></div>
+            </div>
+        </div>
+        
+        <div class="setting-item">
+            <label>Font Size: <span id="fontSizeValue">1.25rem</span></label>
+            <input type="range" min="1" max="2" step="0.05" value="1.25" onchange="changeFontSize(this.value)">
+        </div>
+        
+        <div class="setting-item">
+            <label>Font Family</label>
+            <select onchange="changeFontFamily(this.value)">
+                <option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Default</option>
+                <option value="Arial, sans-serif">Arial</option>
+                <option value="'Times New Roman', serif">Times New Roman</option>
+                <option value="'Courier New', monospace">Courier New</option>
+                <option value="Georgia, serif">Georgia</option>
+            </select>
         </div>
     </div>
 
@@ -1217,19 +1483,54 @@
             document.querySelector('.legend-item:nth-child(2) span:last-child').textContent = `Not Visited ${testConfig.totalQuestions - 1}`;
             document.querySelector('.legend-item:nth-child(3) span:last-child').textContent = `Not Answered ${testConfig.totalQuestions}`;
             
-            // Initialize question grid based on config
-            const grid = document.getElementById('physicsGrid');
-            grid.innerHTML = '';
+            // Initialize Physics question grid
+            const physicsGrid = document.getElementById('physicsGrid');
+            physicsGrid.innerHTML = '';
             for (let i = 1; i <= testConfig.questionCount; i++) {
                 const btn = document.createElement('button');
                 btn.className = 'question-btn not-visited';
                 btn.textContent = i;
                 btn.onclick = () => loadQuestion(i - 1);
-                grid.appendChild(btn);
+                physicsGrid.appendChild(btn);
+            }
+            
+            // Initialize Chemistry question grid
+            const chemistryGrid = document.getElementById('chemistryGrid');
+            chemistryGrid.innerHTML = '';
+            for (let i = 1; i <= testConfig.questionCount; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'question-btn not-visited';
+                btn.textContent = i;
+                btn.onclick = () => loadQuestion(testConfig.questionCount + i - 1);
+                chemistryGrid.appendChild(btn);
+            }
+            
+            // Initialize Mathematics question grid
+            const mathGrid = document.getElementById('mathGrid');
+            mathGrid.innerHTML = '';
+            for (let i = 1; i <= testConfig.questionCount; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'question-btn not-visited';
+                btn.textContent = i;
+                btn.onclick = () => loadQuestion(testConfig.questionCount * 2 + i - 1);
+                mathGrid.appendChild(btn);
             }
             
             loadQuestion(0);
             startTimer();
+        }
+        
+        function toggleSubjectGrid(gridId) {
+            const grid = document.getElementById(gridId);
+            const label = document.getElementById(gridId.replace('Grid', 'Label'));
+            
+            if (grid.style.display === 'none') {
+                grid.style.display = 'grid';
+                if (label) label.style.display = 'block';
+            } else {
+                grid.style.display = 'none';
+                if (label) label.style.display = 'none';
+            }
         }
         
         function switchSubject(subjectName, startIndex) {
@@ -1301,8 +1602,13 @@
         }
         
         function updatePalette() {
-            const buttons = document.querySelectorAll('.question-btn');
-            buttons.forEach((btn, i) => {
+            // Update all grids
+            const physicsButtons = document.querySelectorAll('#physicsGrid .question-btn');
+            const chemistryButtons = document.querySelectorAll('#chemistryGrid .question-btn');
+            const mathButtons = document.querySelectorAll('#mathGrid .question-btn');
+            
+            // Update Physics grid
+            physicsButtons.forEach((btn, i) => {
                 btn.className = 'question-btn';
                 if (i === currentQ) btn.classList.add('current');
                 
@@ -1310,6 +1616,32 @@
                 else if (marked[i]) btn.classList.add('marked');
                 else if (answers[i] !== null) btn.classList.add('answered');
                 else if (visited[i]) btn.classList.add('not-answered');
+                else btn.classList.add('not-visited');
+            });
+            
+            // Update Chemistry grid
+            chemistryButtons.forEach((btn, i) => {
+                const index = testConfig.questionCount + i;
+                btn.className = 'question-btn';
+                if (index === currentQ) btn.classList.add('current');
+                
+                if (marked[index] && answers[index] !== null) btn.classList.add('answered-marked');
+                else if (marked[index]) btn.classList.add('marked');
+                else if (answers[index] !== null) btn.classList.add('answered');
+                else if (visited[index]) btn.classList.add('not-answered');
+                else btn.classList.add('not-visited');
+            });
+            
+            // Update Mathematics grid
+            mathButtons.forEach((btn, i) => {
+                const index = testConfig.questionCount * 2 + i;
+                btn.className = 'question-btn';
+                if (index === currentQ) btn.classList.add('current');
+                
+                if (marked[index] && answers[index] !== null) btn.classList.add('answered-marked');
+                else if (marked[index]) btn.classList.add('marked');
+                else if (answers[index] !== null) btn.classList.add('answered');
+                else if (visited[index]) btn.classList.add('not-answered');
                 else btn.classList.add('not-visited');
             });
         }
@@ -1332,6 +1664,74 @@
             if (confirm('Are you sure you want to exit the exam?')) {
                 alert('Exam submitted!');
             }
+        }
+        
+        // Calculator functions
+        let calcExpression = '';
+        
+        function toggleCalculator() {
+            const modal = document.getElementById('calculatorModal');
+            const overlay = document.getElementById('modalOverlay');
+            modal.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        
+        function calcInput(value) {
+            if (calcExpression === '0') calcExpression = '';
+            calcExpression += value;
+            document.getElementById('calcDisplay').textContent = calcExpression || '0';
+        }
+        
+        function calcClear() {
+            calcExpression = '';
+            document.getElementById('calcDisplay').textContent = '0';
+        }
+        
+        function calcEquals() {
+            try {
+                calcExpression = eval(calcExpression).toString();
+                document.getElementById('calcDisplay').textContent = calcExpression;
+            } catch (e) {
+                document.getElementById('calcDisplay').textContent = 'Error';
+                calcExpression = '';
+            }
+        }
+        
+        // Settings functions
+        function toggleSettings() {
+            const modal = document.getElementById('settingsModal');
+            const overlay = document.getElementById('modalOverlay');
+            modal.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        
+        function toggleInfo() {
+            alert('Test Information:\n\nTotal Questions: ' + testConfig.totalQuestions + '\nDuration: ' + testConfig.duration + ' minutes\nTest Type: ' + testConfig.type);
+        }
+        
+        function changeTextColor(color, element) {
+            document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            document.querySelector('.question-text').style.color = color;
+            document.querySelectorAll('.option-text').forEach(opt => opt.style.color = color);
+        }
+        
+        function changeFontSize(size) {
+            document.getElementById('fontSizeValue').textContent = size + 'rem';
+            document.querySelector('.question-text').style.fontSize = size + 'rem';
+            const optionSize = (parseFloat(size) * 0.92).toFixed(2);
+            document.querySelectorAll('.option-text').forEach(opt => opt.style.fontSize = optionSize + 'rem');
+        }
+        
+        function changeFontFamily(font) {
+            document.querySelector('.question-text').style.fontFamily = font;
+            document.querySelectorAll('.option-text').forEach(opt => opt.style.fontFamily = font);
+        }
+        
+        function closeAllModals() {
+            document.getElementById('calculatorModal').classList.remove('active');
+            document.getElementById('settingsModal').classList.remove('active');
+            document.getElementById('modalOverlay').classList.remove('active');
         }
         
         // Initialize config screen on load
