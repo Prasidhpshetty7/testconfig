@@ -618,19 +618,33 @@
         .question-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 0.5rem;
+            gap: 0.35rem;
             padding: 0 1rem 1rem 1rem;
         }
         
         .question-btn {
             aspect-ratio: 1;
-            border: 1px solid #cbd5e1;
+            border: 2px solid #cbd5e1;
             background: white;
             border-radius: 4px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
+            position: relative;
+            overflow: visible;
+        }
+        
+        .question-btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 12px 12px 0;
+            border-color: transparent transparent transparent transparent;
         }
         
         .question-btn:hover {
@@ -638,32 +652,39 @@
         }
         
         .question-btn.answered {
-            background: #10b981;
-            color: white;
             border-color: #10b981;
         }
         
+        .question-btn.answered::before {
+            border-color: transparent #10b981 transparent transparent;
+        }
+        
         .question-btn.not-answered {
-            background: #ef4444;
-            color: white;
             border-color: #ef4444;
         }
         
+        .question-btn.not-answered::before {
+            border-color: transparent #ef4444 transparent transparent;
+        }
+        
         .question-btn.marked {
-            background: #f59e0b;
-            color: white;
             border-color: #f59e0b;
         }
         
+        .question-btn.marked::before {
+            border-color: transparent #f59e0b transparent transparent;
+        }
+        
         .question-btn.answered-marked {
-            background: #1e40af;
-            color: white;
             border-color: #1e40af;
         }
         
+        .question-btn.answered-marked::before {
+            border-color: transparent #1e40af transparent transparent;
+        }
+        
         .question-btn.not-visited {
-            background: white;
-            color: #64748b;
+            border-color: #cbd5e1;
         }
         
         .question-btn.current {
@@ -707,10 +728,11 @@
         
         .summary-section {
             background: white;
-            padding: 1rem;
+            padding: 0.75rem;
             border-radius: 6px;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
         
         .summary-header {
@@ -725,6 +747,42 @@
             font-weight: 600;
             font-size: 0.9rem;
             color: #1e293b;
+        }
+        
+        .system-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .system-icons i {
+            font-size: 1.2rem;
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .system-icons i:hover {
+            color: #1e293b;
+        }
+        
+        .system-icons .fa-sync-alt {
+            color: #f59e0b;
+        }
+        
+        .system-icons .fa-wifi {
+            color: #10b981;
+        }
+        
+        .system-icons .fa-battery-three-quarters {
+            color: #3b82f6;
         }
         
         @media (max-width: 1024px) {
@@ -957,6 +1015,14 @@
                         <span class="summary-title">Overall Summary</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
+                </div>
+                
+                <div class="system-icons">
+                    <i class="fas fa-sync-alt"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters"></i>
+                    <i class="fas fa-power-off"></i>
+                    <i class="fas fa-ellipsis-v"></i>
                 </div>
             </div>
         </div>
