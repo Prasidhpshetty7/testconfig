@@ -1202,9 +1202,14 @@
                             Mark for Review
                         </button>
                     </div>
-                    <button class="btn-footer btn-next" onclick="nextQuestion()">
-                        Next <i class="fas fa-chevron-right"></i>
-                    </button>
+                    <div style="display: flex; gap: 0.75rem;">
+                        <button class="btn-footer btn-next" onclick="previousQuestion()">
+                            <i class="fas fa-chevron-left"></i> Prev
+                        </button>
+                        <button class="btn-footer btn-next" onclick="nextQuestion()">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -1974,6 +1979,10 @@
         
         function nextQuestion() {
             if (currentQ < testConfig.totalQuestions - 1) loadQuestion(currentQ + 1);
+        }
+        
+        function previousQuestion() {
+            if (currentQ > 0) loadQuestion(currentQ - 1);
         }
         
         function updatePalette() {
