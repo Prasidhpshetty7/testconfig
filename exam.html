@@ -373,14 +373,14 @@
             gap: 0.5rem;
             padding: 0.5rem;
             background: #e8e8e8;
-            min-height: calc(100vh - 220px);
+            min-height: calc(100vh - 140px);
         }
         
         .question-left {
-            background: white;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: transparent;
+            border-radius: 0;
+            overflow: visible;
+            box-shadow: none;
         }
         
         .question-header-bar {
@@ -393,13 +393,14 @@
         
         .question-text-content {
             padding: 2rem;
+            background: white;
         }
         
         .question-right {
             background: white;
             padding: 2rem;
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 0;
+            box-shadow: none;
         }
         
         .question-text {
@@ -904,7 +905,7 @@
                 </div>
 
                 <div class="subject-section">
-                    <div class="subject-header">
+                    <div class="subject-header" onclick="switchSubject('Physics', 0)" style="cursor: pointer;">
                         <span class="subject-name">Physics</span>
                         <span class="subject-badge" id="physicsBadge">01/40</span>
                     </div>
@@ -913,14 +914,14 @@
                 </div>
 
                 <div class="subject-section">
-                    <div class="subject-header">
+                    <div class="subject-header" onclick="switchSubject('Chemistry', testConfig.questionCount)" style="cursor: pointer;">
                         <span class="subject-name">Chemistry</span>
                         <span class="subject-badge" id="chemistryBadge">0/40</span>
                     </div>
                 </div>
 
                 <div class="subject-section">
-                    <div class="subject-header">
+                    <div class="subject-header" onclick="switchSubject('Mathematics', testConfig.questionCount * 2)" style="cursor: pointer;">
                         <span class="subject-name">Mathematics</span>
                         <span class="subject-badge" id="mathematicsBadge">0/40</span>
                     </div>
@@ -1165,9 +1166,29 @@
             startTimer();
         }
         
+        function switchSubject(subjectName, startIndex) {
+            // Update header subtitle
+            const questionInSubject = (currentQ % testConfig.questionCount) + 1;
+            document.getElementById('examSubtitle').textContent = 
+                `${subjectName} ( Section ${subjectName === 'Physics' ? 1 : subjectName === 'Chemistry' ? 2 : 3} of 3 ) > Question ${questionInSubject} of ${testConfig.questionCount} (1 marks)`;
+            
+            // Load the first question of that subject
+            loadQuestion(startIndex);
+        }
+        
         function loadQuestion(index) {
             currentQ = index;
             visited[index] = true;
+            
+            // Determine current subject
+            const subjectIndex = Math.floor(currentQ / testConfig.questionCount);
+            const subjectNames = ['Physics', 'Chemistry', 'Mathematics'];
+            const currentSubject = subjectNames[subjectIndex];
+            const questionInSubject = (currentQ % testConfig.questionCount) + 1;
+            
+            // Update header subtitle
+            document.getElementById('examSubtitle').textContent = 
+                `${currentSubject} ( Section ${subjectIndex + 1} of 3 ) > Question ${questionInSubject} of ${testConfig.questionCount} (1 marks)`;
             
             document.getElementById('questionText').textContent = sampleQuestion.text;
             
