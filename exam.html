@@ -767,11 +767,11 @@
             gap: 2rem;
             padding: 0.75rem 1rem;
             background: white;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 0;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
             position: fixed;
-            bottom: 1rem;
-            right: 1rem;
+            bottom: 0;
+            right: 0;
             width: 348px;
             z-index: 100;
         }
@@ -802,15 +802,15 @@
         /* Right Side Panel Icons */
         .right-panel-icons {
             position: fixed;
-            right: 1rem;
-            top: 50%;
+            right: 0;
+            top: 35%;
             transform: translateY(-50%);
             display: none;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.6rem;
             background: #1e40af;
-            padding: 1rem 0.5rem;
-            border-radius: 10px;
+            padding: 0.6rem 0.35rem;
+            border-radius: 8px 0 0 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             z-index: 100;
         }
@@ -820,13 +820,13 @@
         }
         
         .right-panel-icon {
-            width: 35px;
-            height: 35px;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(255,255,255,0.15);
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -837,7 +837,7 @@
         }
         
         .right-panel-icon i {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             color: white;
         }
         
@@ -1372,14 +1372,14 @@
 
     <!-- Right Side Panel Icons -->
     <div class="right-panel-icons">
-        <div class="right-panel-icon" title="Image Upload">
-            <i class="fas fa-image"></i>
+        <div class="right-panel-icon" title="Mobile/Device">
+            <i class="fas fa-mobile-alt"></i>
         </div>
-        <div class="right-panel-icon" title="Face Scan">
-            <i class="fas fa-user-circle"></i>
+        <div class="right-panel-icon" title="Face Recognition">
+            <i class="fas fa-scan"></i>
         </div>
-        <div class="right-panel-icon" title="Profile">
-            <i class="fas fa-user"></i>
+        <div class="right-panel-icon" title="User ID">
+            <i class="fas fa-id-badge"></i>
         </div>
     </div>
 
@@ -1539,128 +1539,128 @@
         const questionBanks = {
             physics: [
                 {
-                    text: "The pair of physical quantities that have the same dimensions are:\na) Reynold's number and coefficient of friction\nb) Latent heat and gravitational potential\nc) Activity and frequency of light wave\nd) Planck constant and torque",
-                    options: ["b and c are correct", "a and b are correct", "a, b, and c are correct", "All are correct"]
+                    text: "A particle of mass 2 kg is moving in a circular path of radius 5 m with a constant speed of 10 m/s. Calculate the centripetal force acting on the particle and determine the work done by this force in one complete revolution. Also explain why the kinetic energy remains constant throughout the motion.",
+                    options: ["40 N, 0 J - Force is perpendicular to displacement", "40 N, 200 J - Force does positive work", "20 N, 0 J - Force is perpendicular to displacement", "20 N, 100 J - Force does negative work"]
                 },
                 {
-                    text: "A particle is moving in a circular path of radius r. The displacement after half a circle would be:",
-                    options: ["Zero", "πr", "2r", "2πr"]
+                    text: "A projectile is launched from the ground with an initial velocity of 50 m/s at an angle of 37° with the horizontal. Calculate the maximum height reached by the projectile, the time of flight, and the horizontal range. Take g = 10 m/s² and sin(37°) = 0.6, cos(37°) = 0.8.",
+                    options: ["45 m, 6 s, 240 m", "50 m, 5 s, 200 m", "40 m, 8 s, 320 m", "60 m, 10 s, 400 m"]
                 },
                 {
-                    text: "The velocity-time graph of a particle in one-dimensional motion is shown. Which of the following statements is correct?",
-                    options: ["The particle has constant acceleration", "The particle has never turned around", "The particle has zero displacement", "The average velocity is positive"]
+                    text: "Two blocks of masses 3 kg and 5 kg are connected by a light inextensible string passing over a frictionless pulley. If the system is released from rest, find the acceleration of the blocks and the tension in the string. Also calculate the distance traveled by the 5 kg block in the first 2 seconds.",
+                    options: ["2.5 m/s², 37.5 N, 5 m", "3 m/s², 40 N, 6 m", "2 m/s², 35 N, 4 m", "1.5 m/s², 30 N, 3 m"]
                 },
                 {
-                    text: "A ball is thrown vertically upward with velocity u. The maximum height reached is:",
-                    options: ["u²/2g", "u²/g", "2u²/g", "u/2g"]
+                    text: "A uniform rod of length 2 m and mass 4 kg is pivoted at one end and released from a horizontal position. Calculate the angular velocity of the rod when it passes through the vertical position. Also find the linear velocity of the free end at this instant. Take g = 10 m/s².",
+                    options: ["√15 rad/s, 2√15 m/s", "√10 rad/s, 2√10 m/s", "√20 rad/s, 2√20 m/s", "√12 rad/s, 2√12 m/s"]
                 },
                 {
-                    text: "Newton's second law of motion is:",
-                    options: ["F = ma", "F = mv", "F = m/a", "F = a/m"]
+                    text: "A parallel plate capacitor with plate area 0.01 m² and separation 2 mm is charged to a potential difference of 100 V. Calculate the capacitance, charge stored, energy stored, and the electric field between the plates. The dielectric constant of the medium is 1.",
+                    options: ["44.25 pF, 4.425 nC, 221.25 nJ, 50000 V/m", "50 pF, 5 nC, 250 nJ, 60000 V/m", "40 pF, 4 nC, 200 nJ, 45000 V/m", "35 pF, 3.5 nC, 175 nJ, 40000 V/m"]
                 },
                 {
-                    text: "The work done by a force is zero when:",
-                    options: ["Force is perpendicular to displacement", "Force is parallel to displacement", "Force is at 45° to displacement", "Force is opposite to displacement"]
+                    text: "A wire of resistance 10 Ω is stretched to twice its original length. Assuming the volume remains constant, calculate the new resistance of the wire. Also explain how the resistivity of the material changes during this process.",
+                    options: ["40 Ω, resistivity remains constant", "20 Ω, resistivity doubles", "30 Ω, resistivity remains constant", "50 Ω, resistivity increases"]
                 },
                 {
-                    text: "The SI unit of power is:",
-                    options: ["Watt", "Joule", "Newton", "Pascal"]
+                    text: "A convex lens of focal length 20 cm forms an image of an object placed at a distance of 30 cm from the lens. Calculate the position, nature, and magnification of the image. Also determine whether the image is real or virtual and draw a ray diagram to support your answer.",
+                    options: ["60 cm (real, inverted), magnification = -2", "40 cm (real, inverted), magnification = -1.33", "50 cm (real, inverted), magnification = -1.67", "70 cm (real, inverted), magnification = -2.33"]
                 },
                 {
-                    text: "Kinetic energy of a body is directly proportional to:",
-                    options: ["Square of velocity", "Velocity", "Mass", "Momentum"]
+                    text: "A simple harmonic oscillator has a time period of 2 seconds and an amplitude of 10 cm. Calculate the maximum velocity, maximum acceleration, and the velocity of the particle when it is at a distance of 6 cm from the mean position. Take π = 3.14.",
+                    options: ["31.4 cm/s, 98.6 cm/s², 25.12 cm/s", "30 cm/s, 90 cm/s², 24 cm/s", "35 cm/s, 100 cm/s², 28 cm/s", "40 cm/s, 110 cm/s², 32 cm/s"]
                 },
                 {
-                    text: "The momentum of a photon of energy E is:",
-                    options: ["E/c", "Ec", "E/c²", "Ec²"]
+                    text: "A heat engine operates between two reservoirs at temperatures 500 K and 300 K. If the engine absorbs 1000 J of heat from the hot reservoir, calculate the maximum possible work output and the efficiency of the engine. Also determine the heat rejected to the cold reservoir.",
+                    options: ["400 J, 40%, 600 J", "500 J, 50%, 500 J", "300 J, 30%, 700 J", "450 J, 45%, 550 J"]
                 },
                 {
-                    text: "The escape velocity from Earth's surface is approximately:",
-                    options: ["11.2 km/s", "7.2 km/s", "9.8 km/s", "15 km/s"]
+                    text: "A photon of wavelength 400 nm strikes a metal surface with work function 2 eV. Calculate the maximum kinetic energy of the emitted photoelectron, the stopping potential, and the threshold wavelength for the metal. Take h = 6.63 × 10⁻³⁴ J·s, c = 3 × 10⁸ m/s, 1 eV = 1.6 × 10⁻¹⁹ J.",
+                    options: ["1.1 eV, 1.1 V, 620 nm", "1.5 eV, 1.5 V, 650 nm", "0.9 eV, 0.9 V, 600 nm", "1.3 eV, 1.3 V, 640 nm"]
                 }
             ],
             chemistry: [
                 {
-                    text: "The atomic number of an element is determined by the number of:",
-                    options: ["Protons", "Neutrons", "Electrons", "Nucleons"]
+                    text: "Calculate the oxidation state of chromium in K₂Cr₂O₇ and explain the color change observed when potassium dichromate is converted to potassium chromate in basic medium. Also write the balanced chemical equation for this conversion and identify the type of reaction.",
+                    options: ["+6, Orange to Yellow, 2K₂Cr₂O₇ + 2KOH → 2K₂CrO₄ + H₂O, Redox", "+5, Yellow to Orange, K₂Cr₂O₇ + KOH → K₂CrO₄ + H₂O, Acid-base", "+7, Orange to Yellow, K₂Cr₂O₇ + 2KOH → 2K₂CrO₄ + H₂O, Redox", "+6, Yellow to Orange, K₂Cr₂O₇ + KOH → K₂CrO₄, Precipitation"]
                 },
                 {
-                    text: "Which of the following is a noble gas?",
-                    options: ["Argon", "Oxygen", "Nitrogen", "Hydrogen"]
+                    text: "A compound contains 40% carbon, 6.7% hydrogen, and 53.3% oxygen by mass. If the molecular mass of the compound is 180 g/mol, determine its empirical formula and molecular formula. Also identify the compound and write its structural formula.",
+                    options: ["CH₂O, C₆H₁₂O₆ (Glucose)", "CH₃O, C₃H₉O₃ (Glycerol)", "C₂H₄O, C₄H₈O₂ (Dioxane)", "CHO, C₅H₁₀O₅ (Ribose)"]
                 },
                 {
-                    text: "The pH of a neutral solution at 25°C is:",
-                    options: ["7", "0", "14", "1"]
+                    text: "Calculate the pH of a buffer solution containing 0.1 M CH₃COOH and 0.1 M CH₃COONa. Given that Ka for acetic acid is 1.8 × 10⁻⁵. Also explain how the buffer resists changes in pH when small amounts of acid or base are added.",
+                    options: ["4.74, Buffer neutralizes added H⁺ and OH⁻", "5.00, Buffer absorbs H⁺ ions", "4.50, Buffer releases OH⁻ ions", "5.24, Buffer maintains constant [H⁺]"]
                 },
                 {
-                    text: "The molecular formula of glucose is:",
-                    options: ["C₆H₁₂O₆", "C₁₂H₂₂O₁₁", "CH₄", "C₂H₅OH"]
+                    text: "For the reaction: 2NO(g) + O₂(g) → 2NO₂(g), the rate law is given by Rate = k[NO]²[O₂]. If the concentration of NO is doubled and O₂ is tripled, by what factor will the rate of reaction increase? Also determine the overall order of the reaction.",
+                    options: ["12 times, Third order", "6 times, Second order", "8 times, Third order", "9 times, Second order"]
                 },
                 {
-                    text: "Which of the following is an exothermic reaction?",
-                    options: ["Combustion", "Photosynthesis", "Electrolysis", "Decomposition of water"]
+                    text: "Calculate the standard cell potential for the reaction: Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s). Given E°(Zn²⁺/Zn) = -0.76 V and E°(Cu²⁺/Cu) = +0.34 V. Also calculate the equilibrium constant for this reaction at 25°C using the Nernst equation.",
+                    options: ["1.10 V, K = 1.5 × 10³⁷", "0.42 V, K = 2.0 × 10¹⁴", "1.50 V, K = 3.0 × 10⁵⁰", "0.92 V, K = 5.0 × 10³¹"]
                 },
                 {
-                    text: "The valency of carbon is:",
-                    options: ["4", "2", "3", "1"]
+                    text: "Explain the mechanism of SN1 and SN2 reactions with suitable examples. Compare the rate of reaction, stereochemistry, and the effect of substrate structure on both mechanisms. Also identify which mechanism is favored by tertiary alkyl halides.",
+                    options: ["SN1: carbocation intermediate, racemization, favored by 3° halides", "SN2: concerted mechanism, inversion, favored by 3° halides", "SN1: concerted mechanism, retention, favored by 1° halides", "SN2: carbocation intermediate, racemization, favored by 2° halides"]
                 },
                 {
-                    text: "The chemical formula of common salt is:",
-                    options: ["NaCl", "KCl", "CaCl₂", "MgCl₂"]
+                    text: "Calculate the number of moles of KMnO₄ required to oxidize 0.2 moles of Fe²⁺ to Fe³⁺ in acidic medium. Write the balanced redox equation and identify the oxidizing and reducing agents. Also calculate the equivalent weight of KMnO₄ in this reaction.",
+                    options: ["0.04 mol, MnO₄⁻ + 8H⁺ + 5Fe²⁺ → Mn²⁺ + 5Fe³⁺ + 4H₂O, 31.6 g/eq", "0.05 mol, MnO₄⁻ + 5Fe²⁺ → Mn²⁺ + 5Fe³⁺, 158 g/eq", "0.02 mol, 2MnO₄⁻ + 10Fe²⁺ → 2Mn²⁺ + 10Fe³⁺, 79 g/eq", "0.1 mol, MnO₄⁻ + Fe²⁺ → Mn²⁺ + Fe³⁺, 158 g/eq"]
                 },
                 {
-                    text: "Which gas is produced when metals react with acids?",
-                    options: ["Hydrogen", "Oxygen", "Carbon dioxide", "Nitrogen"]
+                    text: "Explain the concept of hybridization in carbon compounds. Describe the geometry, bond angles, and examples of sp, sp², and sp³ hybridization. Also explain why ethene (C₂H₄) is planar while ethane (C₂H₆) has a tetrahedral geometry around each carbon atom.",
+                    options: ["sp: linear 180°, sp²: trigonal planar 120°, sp³: tetrahedral 109.5°", "sp: bent 120°, sp²: linear 180°, sp³: trigonal planar 120°", "sp: tetrahedral 109.5°, sp²: bent 120°, sp³: linear 180°", "sp: trigonal planar 120°, sp²: tetrahedral 109.5°, sp³: linear 180°"]
                 },
                 {
-                    text: "The process of conversion of solid directly to gas is called:",
-                    options: ["Sublimation", "Evaporation", "Condensation", "Melting"]
+                    text: "Calculate the solubility product (Ksp) of AgCl if its solubility in water at 25°C is 1.3 × 10⁻⁵ mol/L. Also determine the molar solubility of AgCl in 0.1 M NaCl solution and explain the common ion effect with this example.",
+                    options: ["1.69 × 10⁻¹⁰, 1.69 × 10⁻⁹ M, Common ion decreases solubility", "1.3 × 10⁻⁵, 1.3 × 10⁻⁶ M, Common ion increases solubility", "1.69 × 10⁻¹⁰, 1.3 × 10⁻⁵ M, No effect on solubility", "2.6 × 10⁻⁵, 2.6 × 10⁻⁶ M, Common ion decreases solubility"]
                 },
                 {
-                    text: "The number of electrons in the outermost shell of noble gases (except Helium) is:",
-                    options: ["8", "2", "4", "6"]
+                    text: "Describe the preparation, properties, and uses of sulfuric acid (H₂SO₄) by the Contact process. Write the balanced equations for all the steps involved and explain why vanadium pentoxide (V₂O₅) is used as a catalyst. Also mention the environmental concerns associated with sulfuric acid production.",
+                    options: ["S + O₂ → SO₂, 2SO₂ + O₂ ⇌ 2SO₃, SO₃ + H₂SO₄ → H₂S₂O₇, V₂O₅ catalyst", "S + H₂ → H₂S, H₂S + O₂ → H₂SO₄, No catalyst needed", "SO₂ + H₂O → H₂SO₃, H₂SO₃ + O₂ → H₂SO₄, Pt catalyst", "S + O₃ → SO₃, SO₃ + H₂O → H₂SO₄, Fe₂O₃ catalyst"]
                 }
             ],
             mathematics: [
                 {
-                    text: "If f(x) = x² + 2x + 1, then f(2) is:",
-                    options: ["9", "7", "5", "11"]
+                    text: "Find the coefficient of x⁷ in the expansion of (2x - 3/x²)¹⁰ using the binomial theorem. Also determine the term independent of x in this expansion and verify your answer by calculating the middle term.",
+                    options: ["61440, Term independent: 17010, Middle term: T₆", "51200, Term independent: 15120, Middle term: T₅", "71680, Term independent: 19683, Middle term: T₇", "40960, Term independent: 13440, Middle term: T₆"]
                 },
                 {
-                    text: "The derivative of sin(x) is:",
-                    options: ["cos(x)", "-cos(x)", "sin(x)", "-sin(x)"]
+                    text: "Evaluate the integral ∫(x² + 3x + 2)/(x³ + 2x² + x) dx using partial fractions. Express your answer in terms of natural logarithms and verify by differentiation.",
+                    options: ["2ln|x| - ln|x+1| + 2ln|x+1| + C", "ln|x| + 2ln|x+1| - ln|x+1| + C", "3ln|x| - 2ln|x+1| + ln|x+1| + C", "ln|x| - ln|x+1| + 3ln|x+1| + C"]
                 },
                 {
-                    text: "The value of ∫x dx is:",
-                    options: ["x²/2 + C", "x² + C", "2x + C", "x³/3 + C"]
+                    text: "Find the derivative of f(x) = sin⁻¹(2x√(1-x²)) with respect to x. Also determine the domain of this function and identify the intervals where the function is increasing or decreasing.",
+                    options: ["2/√(1-4x²), Domain: [-1/2, 1/2], Increasing on entire domain", "1/√(1-x²), Domain: [-1, 1], Decreasing on [-1, 0]", "4x/√(1-4x²), Domain: [-1/√2, 1/√2], Increasing on [0, 1/√2]", "2√(1-x²)/√(1-4x²), Domain: [-1, 1], Increasing on entire domain"]
                 },
                 {
-                    text: "If log₁₀(x) = 2, then x is:",
-                    options: ["100", "10", "20", "1000"]
+                    text: "Solve the differential equation dy/dx + y·tan(x) = sec(x) using the integrating factor method. Find the particular solution if y = 1 when x = 0, and verify your solution by substitution.",
+                    options: ["y·cos(x) = sin(x) + 1, y = tan(x) + sec(x)", "y·sec(x) = tan(x) + 1, y = sin(x) + cos(x)", "y·sin(x) = cos(x) + 1, y = cot(x) + csc(x)", "y·tan(x) = sec(x) + 1, y = 1 + csc(x)"]
                 },
                 {
-                    text: "The sum of first n natural numbers is:",
-                    options: ["n(n+1)/2", "n²", "n(n-1)/2", "2n"]
+                    text: "Find the area of the region bounded by the curves y = x² and y = 2x + 3 using definite integration. Also calculate the volume of the solid generated when this region is rotated about the x-axis through 360°.",
+                    options: ["32/3 square units, 216π/5 cubic units", "28/3 square units, 196π/5 cubic units", "36/3 square units, 256π/5 cubic units", "24/3 square units, 176π/5 cubic units"]
                 },
                 {
-                    text: "The value of sin(90°) is:",
-                    options: ["1", "0", "√3/2", "1/2"]
+                    text: "Prove that the function f(x) = x³ - 6x² + 9x + 15 is strictly increasing on (-∞, 1) ∪ (3, ∞) and strictly decreasing on (1, 3). Also find the local maximum and minimum values of the function using the second derivative test.",
+                    options: ["Local max at x=1: f(1)=19, Local min at x=3: f(3)=15", "Local max at x=2: f(2)=17, Local min at x=4: f(4)=13", "Local max at x=1: f(1)=17, Local min at x=3: f(3)=13", "Local max at x=0: f(0)=15, Local min at x=2: f(2)=11"]
                 },
                 {
-                    text: "If a² + b² = 25 and ab = 12, then (a + b)² is:",
-                    options: ["49", "25", "37", "13"]
+                    text: "Find the equation of the tangent and normal to the curve x²/16 + y²/9 = 1 at the point (2√2, 3/√2). Also calculate the angle between the tangent and the x-axis, and determine the length of the subtangent and subnormal.",
+                    options: ["Tangent: x√2 + 2y = 7, Normal: 2x - y√2 = 3√2, Angle: tan⁻¹(-√2/2)", "Tangent: x + y√2 = 5, Normal: x√2 - y = 2, Angle: tan⁻¹(-1/√2)", "Tangent: 2x + y = 6, Normal: x - 2y = 0, Angle: tan⁻¹(-2)", "Tangent: x + 2y√2 = 8, Normal: 2x√2 - y = 5, Angle: tan⁻¹(-1/2√2)"]
                 },
                 {
-                    text: "The slope of a line perpendicular to y = 2x + 3 is:",
-                    options: ["-1/2", "2", "-2", "1/2"]
+                    text: "Evaluate lim(x→0) [(sin(x) - x·cos(x))/x³] using L'Hôpital's rule. Apply the rule multiple times if necessary and verify your answer using Taylor series expansion of sin(x) and cos(x).",
+                    options: ["1/3", "1/2", "1/6", "1/4"]
                 },
                 {
-                    text: "The determinant of a 2×2 identity matrix is:",
-                    options: ["1", "0", "2", "4"]
+                    text: "Find the inverse of the matrix A = [[2, 3, 1], [1, 2, 3], [3, 1, 2]] using the adjoint method. Verify your answer by showing that A·A⁻¹ = I, where I is the identity matrix. Also calculate the determinant of A.",
+                    options: ["det(A) = -18, A⁻¹ = (1/18)[[1, -5, 7], [7, 1, -5], [-5, 7, 1]]", "det(A) = 18, A⁻¹ = (1/18)[[1, 5, -7], [-7, 1, 5], [5, -7, 1]]", "det(A) = -12, A⁻¹ = (1/12)[[2, -3, 1], [1, 2, -3], [-3, 1, 2]]", "det(A) = 24, A⁻¹ = (1/24)[[3, -1, 2], [2, 3, -1], [-1, 2, 3]]"]
                 },
                 {
-                    text: "If P(A) = 0.3 and P(B) = 0.4, and A and B are independent, then P(A ∩ B) is:",
-                    options: ["0.12", "0.7", "0.1", "0.24"]
+                    text: "A bag contains 5 red balls, 4 blue balls, and 3 green balls. Three balls are drawn at random without replacement. Calculate the probability that: (a) all three balls are of different colors, (b) at least two balls are red, (c) exactly one ball is blue.",
+                    options: ["(a) 3/11, (b) 19/44, (c) 21/44", "(a) 2/11, (b) 15/44, (c) 18/44", "(a) 4/11, (b) 23/44, (c) 25/44", "(a) 1/11, (b) 11/44, (c) 15/44"]
                 }
             ]
         };
