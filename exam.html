@@ -511,11 +511,13 @@
         .sidebar {
             background: #f1f5f9;
             padding: 1rem;
-            overflow-y: hidden;
+            padding-bottom: 4rem;
+            overflow-y: auto;
             border-left: 1px solid #cbd5e1;
             display: flex;
             flex-direction: column;
             height: calc(100vh - 70px);
+            position: relative;
         }
         
         .timer-section {
@@ -756,11 +758,14 @@
             align-items: center;
             gap: 1.5rem;
             padding: 0.5rem;
-            margin-top: 0.5rem;
             background: white;
             border-radius: 6px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            flex-shrink: 0;
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            width: 348px;
+            z-index: 100;
         }
         
         .system-icons i {
@@ -1262,9 +1267,33 @@
                 </div>
 
                 <div class="summary-section">
-                    <div class="summary-header">
+                    <div class="summary-header" onclick="toggleOverallSummary()">
                         <span class="summary-title">Overall Summary</span>
-                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-down" id="summaryChevron"></i>
+                    </div>
+                    <div class="legend-section" style="margin-top: 0; box-shadow: none; display: none;" id="overallSummaryContent">
+                        <div class="legend-grid">
+                            <div class="legend-item">
+                                <div class="legend-box answered"></div>
+                                <span id="overallAnswered">Answered 0</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box not-visited"></div>
+                                <span id="overallNotVisited">Not Visited 0</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box not-answered"></div>
+                                <span id="overallNotAnswered">Not Answered 0</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box marked"></div>
+                                <span id="overallMarked">Marked 0</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box answered-marked"></div>
+                                <span id="overallAnsweredMarked">Ans & Marked 0</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -1541,6 +1570,10 @@
             document.getElementById('mathNotVisited').textContent = `Not Visited ${testConfig.questionCount}`;
             document.getElementById('mathNotAnswered').textContent = `Not Answered ${testConfig.questionCount}`;
             
+            // Update overall summary initial counts
+            document.getElementById('overallNotVisited').textContent = `Not Visited ${testConfig.totalQuestions - 1}`;
+            document.getElementById('overallNotAnswered').textContent = `Not Answered ${testConfig.totalQuestions}`;
+            
             // Initialize Physics question grid
             const physicsGrid = document.getElementById('physicsGrid');
             physicsGrid.innerHTML = '';
@@ -1583,6 +1616,21 @@
             const label = document.getElementById(gridId.replace('Grid', 'Label'));
             const legend = document.getElementById(gridId.replace('Grid', 'Legend'));
             
+            // Close all other grids first
+            const allGrids = ['physicsGrid', 'chemistryGrid', 'mathGrid'];
+            allGrids.forEach(gId => {
+                if (gId !== gridId) {
+                    const otherGrid = document.getElementById(gId);
+                    const otherLabel = document.getElementById(gId.replace('Grid', 'Label'));
+                    const otherLegend = document.getElementById(gId.replace('Grid', 'Legend'));
+                    
+                    if (otherGrid) otherGrid.style.display = 'none';
+                    if (otherLabel) otherLabel.style.display = 'none';
+                    if (otherLegend) otherLegend.style.display = 'none';
+                }
+            });
+            
+            // Toggle current grid
             if (grid.style.display === 'none') {
                 grid.style.display = 'grid';
                 if (label) label.style.display = 'block';
@@ -1776,6 +1824,19 @@
             } else if (subjectIndex === 2) {
                 document.getElementById('mathematicsBadge').textContent = `${questionInSubject.toString().padStart(2, '0')}/${testConfig.questionCount}`;
             }
+            
+            // Update overall summary
+            const totalAnswered = physicsStats.answered + chemistryStats.answered + mathStats.answered;
+            const totalNotVisited = physicsStats.notVisited + chemistryStats.notVisited + mathStats.notVisited;
+            const totalNotAnswered = physicsStats.notAnswered + chemistryStats.notAnswered + mathStats.notAnswered;
+            const totalMarked = physicsStats.marked + chemistryStats.marked + mathStats.marked;
+            const totalAnsweredMarked = physicsStats.answeredMarked + chemistryStats.answeredMarked + mathStats.answeredMarked;
+            
+            document.getElementById('overallAnswered').textContent = `Answered ${totalAnswered}`;
+            document.getElementById('overallNotVisited').textContent = `Not Visited ${totalNotVisited}`;
+            document.getElementById('overallNotAnswered').textContent = `Not Answered ${totalNotAnswered}`;
+            document.getElementById('overallMarked').textContent = `Marked ${totalMarked}`;
+            document.getElementById('overallAnsweredMarked').textContent = `Ans & Marked ${totalAnsweredMarked}`;
         }
         
         function startTimer() {
@@ -1858,6 +1919,21 @@
         function changeFontFamily(font) {
             document.querySelector('.question-text').style.fontFamily = font;
             document.querySelectorAll('.option-text').forEach(opt => opt.style.fontFamily = font);
+        }
+        
+        function toggleOverallSummary() {
+            const content = document.getElementById('overallSummaryContent');
+            const chevron = document.getElementById('summaryChevron');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                chevron.classList.remove('fa-chevron-down');
+                chevron.classList.add('fa-chevron-up');
+            } else {
+                content.style.display = 'none';
+                chevron.classList.remove('fa-chevron-up');
+                chevron.classList.add('fa-chevron-down');
+            }
         }
         
         function closeAllModals() {
