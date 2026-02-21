@@ -805,24 +805,28 @@
             right: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            display: flex;
+            display: none;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
             background: #1e40af;
-            padding: 1.5rem 0.75rem;
-            border-radius: 12px;
+            padding: 1rem 0.5rem;
+            border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             z-index: 100;
         }
         
+        .right-panel-icons.active {
+            display: flex;
+        }
+        
         .right-panel-icon {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(255,255,255,0.15);
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -833,7 +837,7 @@
         }
         
         .right-panel-icon i {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: white;
         }
         
@@ -1743,6 +1747,9 @@
             
             document.getElementById('profileSetup').style.display = 'none';
             document.getElementById('examContainer').classList.add('active');
+            
+            // Show right panel icons when exam starts
+            document.querySelector('.right-panel-icons').classList.add('active');
             
             // Enter fullscreen
             enterFullscreen();
