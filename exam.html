@@ -307,19 +307,33 @@
         }
         
         .close-btn {
-            background: #fee2e2;
-            border-color: #fecaca;
-            color: #ef4444;
+            background: transparent;
+            border: none;
+            color: #1e40af;
+            font-size: 1.2rem;
         }
         
         .close-btn:hover {
-            background: #fecaca;
+            background: transparent;
+            color: #1e3a8a;
         }
         
         .exam-body {
             display: grid;
             grid-template-columns: 1fr 320px;
-            height: calc(100vh - 60px);
+            height: calc(100vh - 70px);
+            position: relative;
+        }
+        
+        .exam-body::before {
+            content: '';
+            position: absolute;
+            right: 320px;
+            top: -70px;
+            width: 8px;
+            height: calc(100vh);
+            background: #e2e8f0;
+            z-index: 10;
         }
         
         .question-section {
