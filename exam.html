@@ -522,7 +522,7 @@
             background: white;
             padding: 0;
             border-radius: 6px;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             overflow: hidden;
             flex-shrink: 0;
@@ -533,29 +533,29 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #64748b;
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 1rem;
             background: #dbeafe;
         }
         
         .timer-header i {
             color: #3b82f6;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
         
         .timer-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem 1rem;
+            padding: 0.6rem 1rem;
             background: #f8fafc;
         }
         
         .test-label {
             display: flex;
             align-items: center;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #3b82f6;
             font-weight: 500;
         }
@@ -566,7 +566,7 @@
         }
         
         .timer-display {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #1e40af;
         }
@@ -578,13 +578,13 @@
         .subject-section {
             background: white;
             border-radius: 6px;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             flex-shrink: 0;
         }
         
         .subject-header {
-            padding: 0.75rem 1rem;
+            padding: 0.6rem 1rem;
             background: #e2e8f0;
             border-radius: 6px 6px 0 0;
             display: flex;
@@ -595,7 +595,7 @@
         
         .subject-name {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #1e293b;
         }
         
@@ -604,21 +604,21 @@
             color: white;
             padding: 0.15rem 0.5rem;
             border-radius: 10px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
         }
         
         .questions-label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #64748b;
-            padding: 0.75rem 1rem;
+            padding: 0.5rem 1rem;
             font-weight: 600;
         }
         
         .question-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 0.15rem;
+            gap: 0.2rem;
             padding: 0 0.5rem 0.5rem 0.5rem;
         }
         
@@ -627,13 +627,13 @@
             border: 2px solid #cbd5e1;
             background: white;
             border-radius: 3px;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             position: relative;
             overflow: visible;
-            padding: 0.5rem;
+            padding: 0.35rem;
         }
         
         .question-btn::before {
@@ -644,7 +644,7 @@
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 0 26px 26px 0;
+            border-width: 0 22px 22px 0;
             border-color: transparent transparent transparent transparent;
         }
         
@@ -694,9 +694,9 @@
         
         .legend-section {
             background: white;
-            padding: 0.75rem;
+            padding: 0.5rem;
             border-radius: 6px;
-            margin-top: 0.75rem;
+            margin-top: 0.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             flex-shrink: 0;
         }
@@ -704,19 +704,19 @@
         .legend-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.5rem;
-            font-size: 0.75rem;
+            gap: 0.35rem;
+            font-size: 0.7rem;
         }
         
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.35rem;
         }
         
         .legend-box {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             border-radius: 3px;
             flex-shrink: 0;
         }
@@ -729,7 +729,7 @@
         
         .summary-section {
             background: white;
-            padding: 0.75rem;
+            padding: 0.6rem;
             border-radius: 6px;
             margin-top: 0.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -741,12 +741,12 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            padding: 0.5rem 0;
+            padding: 0.25rem 0;
         }
         
         .summary-title {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #1e293b;
         }
         
@@ -755,7 +755,7 @@
             justify-content: center;
             align-items: center;
             gap: 1.5rem;
-            padding: 0.75rem;
+            padding: 0.5rem;
             margin-top: 0.5rem;
             background: white;
             border-radius: 6px;
@@ -764,7 +764,7 @@
         }
         
         .system-icons i {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #64748b;
             cursor: pointer;
             transition: color 0.3s;
@@ -1166,6 +1166,31 @@
                     </div>
                     <div class="questions-label">Questions</div>
                     <div class="question-grid" id="physicsGrid"></div>
+                    
+                    <div class="legend-section" style="margin-top: 0.5rem;">
+                        <div class="legend-grid">
+                            <div class="legend-item">
+                                <div class="legend-box answered"></div>
+                                <span id="physicsAnswered">Answered 0</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box not-visited"></div>
+                                <span id="physicsNotVisited">Not Visited 39</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box not-answered"></div>
+                                <span id="physicsNotAnswered">Not Answered 40</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box marked"></div>
+                                <span id="physicsMarked">Marked 0</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box answered-marked"></div>
+                                <span id="physicsAnsweredMarked">Ans & Marked 0</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="subject-section">
@@ -1175,6 +1200,31 @@
                     </div>
                     <div class="questions-label" style="display: none;" id="chemistryLabel">Questions</div>
                     <div class="question-grid" id="chemistryGrid" style="display: none;"></div>
+                    
+                    <div class="legend-section" style="margin-top: 0.5rem; display: none;" id="chemistryLegend">
+                        <div class="legend-grid">
+                            <div class="legend-item">
+                                <div class="legend-box answered"></div>
+                                <span id="chemistryAnswered">Answered 0</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box not-visited"></div>
+                                <span id="chemistryNotVisited">Not Visited 40</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box not-answered"></div>
+                                <span id="chemistryNotAnswered">Not Answered 40</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box marked"></div>
+                                <span id="chemistryMarked">Marked 0</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box answered-marked"></div>
+                                <span id="chemistryAnsweredMarked">Ans & Marked 0</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="subject-section">
@@ -1184,29 +1234,29 @@
                     </div>
                     <div class="questions-label" style="display: none;" id="mathLabel">Questions</div>
                     <div class="question-grid" id="mathGrid" style="display: none;"></div>
-                </div>
-
-                <div class="legend-section">
-                    <div class="legend-grid">
-                        <div class="legend-item">
-                            <div class="legend-box answered"></div>
-                            <span>Answered 0</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-box not-visited"></div>
-                            <span>Not Visited 39</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-box not-answered"></div>
-                            <span>Not Answered 40</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-box marked"></div>
-                            <span>Marked for Review 0</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-box answered-marked"></div>
-                            <span>Answered & Marked for Review 0</span>
+                    
+                    <div class="legend-section" style="margin-top: 0.5rem; display: none;" id="mathLegend">
+                        <div class="legend-grid">
+                            <div class="legend-item">
+                                <div class="legend-box answered"></div>
+                                <span id="mathAnswered">Answered 0</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box not-visited"></div>
+                                <span id="mathNotVisited">Not Visited 40</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box not-answered"></div>
+                                <span id="mathNotAnswered">Not Answered 40</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box marked"></div>
+                                <span id="mathMarked">Marked 0</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box answered-marked"></div>
+                                <span id="mathAnsweredMarked">Ans & Marked 0</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1479,9 +1529,17 @@
             document.getElementById('chemistryBadge').textContent = `0/${testConfig.questionCount}`;
             document.getElementById('mathematicsBadge').textContent = `0/${testConfig.questionCount}`;
             
-            // Update legend counts
-            document.querySelector('.legend-item:nth-child(2) span:last-child').textContent = `Not Visited ${testConfig.totalQuestions - 1}`;
-            document.querySelector('.legend-item:nth-child(3) span:last-child').textContent = `Not Answered ${testConfig.totalQuestions}`;
+            // Update Physics legend initial counts
+            document.getElementById('physicsNotVisited').textContent = `Not Visited ${testConfig.questionCount - 1}`;
+            document.getElementById('physicsNotAnswered').textContent = `Not Answered ${testConfig.questionCount}`;
+            
+            // Update Chemistry legend initial counts
+            document.getElementById('chemistryNotVisited').textContent = `Not Visited ${testConfig.questionCount}`;
+            document.getElementById('chemistryNotAnswered').textContent = `Not Answered ${testConfig.questionCount}`;
+            
+            // Update Mathematics legend initial counts
+            document.getElementById('mathNotVisited').textContent = `Not Visited ${testConfig.questionCount}`;
+            document.getElementById('mathNotAnswered').textContent = `Not Answered ${testConfig.questionCount}`;
             
             // Initialize Physics question grid
             const physicsGrid = document.getElementById('physicsGrid');
@@ -1523,13 +1581,16 @@
         function toggleSubjectGrid(gridId) {
             const grid = document.getElementById(gridId);
             const label = document.getElementById(gridId.replace('Grid', 'Label'));
+            const legend = document.getElementById(gridId.replace('Grid', 'Legend'));
             
             if (grid.style.display === 'none') {
                 grid.style.display = 'grid';
                 if (label) label.style.display = 'block';
+                if (legend) legend.style.display = 'block';
             } else {
                 grid.style.display = 'none';
                 if (label) label.style.display = 'none';
+                if (legend) legend.style.display = 'none';
             }
         }
         
@@ -1607,16 +1668,32 @@
             const chemistryButtons = document.querySelectorAll('#chemistryGrid .question-btn');
             const mathButtons = document.querySelectorAll('#mathGrid .question-btn');
             
+            // Initialize counters for each subject
+            let physicsStats = { answered: 0, notVisited: 0, notAnswered: 0, marked: 0, answeredMarked: 0 };
+            let chemistryStats = { answered: 0, notVisited: 0, notAnswered: 0, marked: 0, answeredMarked: 0 };
+            let mathStats = { answered: 0, notVisited: 0, notAnswered: 0, marked: 0, answeredMarked: 0 };
+            
             // Update Physics grid
             physicsButtons.forEach((btn, i) => {
                 btn.className = 'question-btn';
                 if (i === currentQ) btn.classList.add('current');
                 
-                if (marked[i] && answers[i] !== null) btn.classList.add('answered-marked');
-                else if (marked[i]) btn.classList.add('marked');
-                else if (answers[i] !== null) btn.classList.add('answered');
-                else if (visited[i]) btn.classList.add('not-answered');
-                else btn.classList.add('not-visited');
+                if (marked[i] && answers[i] !== null) {
+                    btn.classList.add('answered-marked');
+                    physicsStats.answeredMarked++;
+                } else if (marked[i]) {
+                    btn.classList.add('marked');
+                    physicsStats.marked++;
+                } else if (answers[i] !== null) {
+                    btn.classList.add('answered');
+                    physicsStats.answered++;
+                } else if (visited[i]) {
+                    btn.classList.add('not-answered');
+                    physicsStats.notAnswered++;
+                } else {
+                    btn.classList.add('not-visited');
+                    physicsStats.notVisited++;
+                }
             });
             
             // Update Chemistry grid
@@ -1625,11 +1702,22 @@
                 btn.className = 'question-btn';
                 if (index === currentQ) btn.classList.add('current');
                 
-                if (marked[index] && answers[index] !== null) btn.classList.add('answered-marked');
-                else if (marked[index]) btn.classList.add('marked');
-                else if (answers[index] !== null) btn.classList.add('answered');
-                else if (visited[index]) btn.classList.add('not-answered');
-                else btn.classList.add('not-visited');
+                if (marked[index] && answers[index] !== null) {
+                    btn.classList.add('answered-marked');
+                    chemistryStats.answeredMarked++;
+                } else if (marked[index]) {
+                    btn.classList.add('marked');
+                    chemistryStats.marked++;
+                } else if (answers[index] !== null) {
+                    btn.classList.add('answered');
+                    chemistryStats.answered++;
+                } else if (visited[index]) {
+                    btn.classList.add('not-answered');
+                    chemistryStats.notAnswered++;
+                } else {
+                    btn.classList.add('not-visited');
+                    chemistryStats.notVisited++;
+                }
             });
             
             // Update Mathematics grid
@@ -1638,12 +1726,56 @@
                 btn.className = 'question-btn';
                 if (index === currentQ) btn.classList.add('current');
                 
-                if (marked[index] && answers[index] !== null) btn.classList.add('answered-marked');
-                else if (marked[index]) btn.classList.add('marked');
-                else if (answers[index] !== null) btn.classList.add('answered');
-                else if (visited[index]) btn.classList.add('not-answered');
-                else btn.classList.add('not-visited');
+                if (marked[index] && answers[index] !== null) {
+                    btn.classList.add('answered-marked');
+                    mathStats.answeredMarked++;
+                } else if (marked[index]) {
+                    btn.classList.add('marked');
+                    mathStats.marked++;
+                } else if (answers[index] !== null) {
+                    btn.classList.add('answered');
+                    mathStats.answered++;
+                } else if (visited[index]) {
+                    btn.classList.add('not-answered');
+                    mathStats.notAnswered++;
+                } else {
+                    btn.classList.add('not-visited');
+                    mathStats.notVisited++;
+                }
             });
+            
+            // Update Physics legend
+            document.getElementById('physicsAnswered').textContent = `Answered ${physicsStats.answered}`;
+            document.getElementById('physicsNotVisited').textContent = `Not Visited ${physicsStats.notVisited}`;
+            document.getElementById('physicsNotAnswered').textContent = `Not Answered ${physicsStats.notAnswered}`;
+            document.getElementById('physicsMarked').textContent = `Marked ${physicsStats.marked}`;
+            document.getElementById('physicsAnsweredMarked').textContent = `Ans & Marked ${physicsStats.answeredMarked}`;
+            
+            // Update Chemistry legend
+            document.getElementById('chemistryAnswered').textContent = `Answered ${chemistryStats.answered}`;
+            document.getElementById('chemistryNotVisited').textContent = `Not Visited ${chemistryStats.notVisited}`;
+            document.getElementById('chemistryNotAnswered').textContent = `Not Answered ${chemistryStats.notAnswered}`;
+            document.getElementById('chemistryMarked').textContent = `Marked ${chemistryStats.marked}`;
+            document.getElementById('chemistryAnsweredMarked').textContent = `Ans & Marked ${chemistryStats.answeredMarked}`;
+            
+            // Update Mathematics legend
+            document.getElementById('mathAnswered').textContent = `Answered ${mathStats.answered}`;
+            document.getElementById('mathNotVisited').textContent = `Not Visited ${mathStats.notVisited}`;
+            document.getElementById('mathNotAnswered').textContent = `Not Answered ${mathStats.notAnswered}`;
+            document.getElementById('mathMarked').textContent = `Marked ${mathStats.marked}`;
+            document.getElementById('mathAnsweredMarked').textContent = `Ans & Marked ${mathStats.answeredMarked}`;
+            
+            // Update subject badges with current question position
+            const subjectIndex = Math.floor(currentQ / testConfig.questionCount);
+            const questionInSubject = (currentQ % testConfig.questionCount) + 1;
+            
+            if (subjectIndex === 0) {
+                document.getElementById('physicsBadge').textContent = `${questionInSubject.toString().padStart(2, '0')}/${testConfig.questionCount}`;
+            } else if (subjectIndex === 1) {
+                document.getElementById('chemistryBadge').textContent = `${questionInSubject.toString().padStart(2, '0')}/${testConfig.questionCount}`;
+            } else if (subjectIndex === 2) {
+                document.getElementById('mathematicsBadge').textContent = `${questionInSubject.toString().padStart(2, '0')}/${testConfig.questionCount}`;
+            }
         }
         
         function startTimer() {
