@@ -464,7 +464,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 2rem;
+            padding: 0.75rem 2rem;
             background: white;
             border-top: 1px solid #e2e8f0;
         }
@@ -474,34 +474,30 @@
             gap: 0.75rem;
         }
         
-        .btn-secondary {
-            padding: 0.6rem 1.5rem;
+        .btn-footer {
+            padding: 0.4rem 1.2rem;
             background: white;
-            border: 1px solid #cbd5e1;
-            border-radius: 4px;
+            border: 2px solid #1e293b;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            color: #1e40af;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
         
-        .btn-secondary:hover {
-            background: #f8fafc;
-            border-color: #94a3b8;
-        }
-        
-        .btn-primary {
-            padding: 0.6rem 1.5rem;
+        .btn-footer:hover:not(:disabled) {
             background: #3b82f6;
             color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s;
+            border-color: #3b82f6;
         }
         
-        .btn-primary:hover {
-            background: #2563eb;
+        .btn-next {
+            background: white;
+            border-color: #1e293b;
         }
         
         /* Sidebar */
@@ -870,15 +866,18 @@
                 
                 <div class="question-footer">
                     <div class="footer-left">
-                        <button class="btn-secondary" onclick="clearAnswer()">
-                            <i class="fas fa-eraser"></i> Clear
+                        <button class="btn-footer" disabled style="opacity: 0.5; cursor: not-allowed;">
+                            Finish
                         </button>
-                        <button class="btn-secondary" onclick="markForReview()">
-                            <i class="fas fa-bookmark"></i> Mark for Review
+                        <button class="btn-footer" onclick="clearAnswer()">
+                            <i class="fas fa-trash-alt"></i> Clear
+                        </button>
+                        <button class="btn-footer" onclick="markForReview()">
+                            Mark for Review
                         </button>
                     </div>
-                    <button class="btn-primary" onclick="nextQuestion()">
-                        Next <i class="fas fa-arrow-right"></i>
+                    <button class="btn-footer btn-next" onclick="nextQuestion()">
+                        Next <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
             </div>
