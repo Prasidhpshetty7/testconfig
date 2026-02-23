@@ -1794,11 +1794,15 @@
             document.getElementById('examSubtitle').textContent = 
                 `Physics ( Section 1 of 3 ) > Question 1 of ${testConfig.questionCount} (1 marks)`;
             
-            // Update subject badges
-            document.getElementById('physicsBadge').textContent = `01/${testConfig.questionCount}`;
+            // Update subject badges with answered count
+            const physicsAnswered = answers.slice(0, testConfig.questionCount).filter(a => a !== null).length;
+            const chemistryAnswered = answers.slice(testConfig.questionCount, testConfig.questionCount * 2).filter(a => a !== null).length;
+            const mathAnswered = answers.slice(testConfig.questionCount * 2, testConfig.questionCount * 3).filter(a => a !== null).length;
+            
+            document.getElementById('physicsBadge').textContent = `${physicsAnswered.toString().padStart(2, '0')}/${testConfig.questionCount}`;
             document.getElementById('physicsBadge').classList.add('active');
-            document.getElementById('chemistryBadge').textContent = `0/${testConfig.questionCount}`;
-            document.getElementById('mathematicsBadge').textContent = `0/${testConfig.questionCount}`;
+            document.getElementById('chemistryBadge').textContent = `${chemistryAnswered.toString().padStart(2, '0')}/${testConfig.questionCount}`;
+            document.getElementById('mathematicsBadge').textContent = `${mathAnswered.toString().padStart(2, '0')}/${testConfig.questionCount}`;
             
             // Update Physics legend initial counts
             document.getElementById('physicsNotVisited').textContent = `Not Visited ${testConfig.questionCount - 1}`;
@@ -2088,16 +2092,27 @@
             document.getElementById('mathMarked').textContent = `Marked ${mathStats.marked}`;
             document.getElementById('mathAnsweredMarked').textContent = `Ans & Marked ${mathStats.answeredMarked}`;
             
-            // Update subject badges with current question position
-            const subjectIndex = Math.floor(currentQ / testConfig.questionCount);
-            const questionInSubject = (currentQ % testConfig.questionCount) + 1;
+            // Update subject badges with answered count
+            const physicsAnswered = answers.slice(0, testConfig.questionCount).filter(a => a !== null).length;
+            const chemistryAnswered = answers.slice(testConfig.questionCount, testConfig.questionCount * 2).filter(a => a !== null).length;
+            const mathAnswered = answers.slice(testConfig.questionCount * 2, testConfig.questionCount * 3).filter(a => a !== null).length;
             
+            document.getElementById('physicsBadge').textContent = `${physicsAnswered.toString().padStart(2, '0')}/${testConfig.questionCount}`;
+            document.getElementById('chemistryBadge').textContent = `${chemistryAnswered.toString().padStart(2, '0')}/${testConfig.questionCount}`;
+            document.getElementById('mathematicsBadge').textContent = `${mathAnswered.toString().padStart(2, '0')}/${testConfig.questionCount}`;
+            
+            // Keep active state for current subject
+            document.getElementById('physicsBadge').classList.remove('active');
+            document.getElementById('chemistryBadge').classList.remove('active');
+            document.getElementById('mathematicsBadge').classList.remove('active');
+            
+            const subjectIndex = Math.floor(currentQ / testConfig.questionCount);
             if (subjectIndex === 0) {
-                document.getElementById('physicsBadge').textContent = `${questionInSubject.toString().padStart(2, '0')}/${testConfig.questionCount}`;
+                document.getElementById('physicsBadge').classList.add('active');
             } else if (subjectIndex === 1) {
-                document.getElementById('chemistryBadge').textContent = `${questionInSubject.toString().padStart(2, '0')}/${testConfig.questionCount}`;
+                document.getElementById('chemistryBadge').classList.add('active');
             } else if (subjectIndex === 2) {
-                document.getElementById('mathematicsBadge').textContent = `${questionInSubject.toString().padStart(2, '0')}/${testConfig.questionCount}`;
+                document.getElementById('mathematicsBadge').classList.add('active');
             }
             
             // Update overall summary
